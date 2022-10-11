@@ -109,6 +109,9 @@ Things you may want to cover:
         - bio
     * Login Form
         - login using email, password
+    * User Panel
+        - shows user nickname, logout button
+        - clicking user nickname leads to Player info
     * Player/User Info (:id)
         - view player info
         * Update Player Form
