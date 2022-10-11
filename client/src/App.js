@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import {useEffect, useState} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
+import NavigationBar from './NavigationBar';
+import Home from './Home';
 
 function App() {
 
@@ -16,12 +18,16 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <NavigationBar />
         <Switch>
           <Route path="/testing">
             <h1>Test Route</h1>
           </Route>
-          <Route path="/" >
+          <Route path="/count" >
             <h1>Page count = {count}</h1>
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       </div>
