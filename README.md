@@ -155,3 +155,4 @@ Things you may want to cover:
                 - Select a game from dropdown menu
                 - Session creator is logged in player
                 - Console is game.console
+* password for admin is lifeink
