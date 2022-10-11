@@ -5,8 +5,19 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = find_user
-        render json: user, status: :ok
+        if(session[:user_id])
+            user = User.find_by(id: session[:user_id])
+            if user
+                render json: user, status: :ok
+            else
+                render json: {error: "Not logged in"}, status: :unauthorized
+            end
+        else
+            user = find_user
+            render json: user, status: :ok
+        rescue ActiveRecord::RecordNotFound
+            render json: {error: "User Not Found"}
+        end
     end
 
     def create
