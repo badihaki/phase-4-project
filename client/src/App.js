@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import NavigationBar from './NavigationBar';
 import Home from './Home';
+import NewPlayer from './NewPlayer';
 
 function App() {
 
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/count" >
             <h1>Page count = {count}</h1>
+          </Route>
+          <Route path={"/signup"}>
+            <NewPlayer />
           </Route>
           <Route path="/">
             <Home />
