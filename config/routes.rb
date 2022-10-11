@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   # auth paths
   get '/me', to: 'users#show'
+  post '/login', to: 'sessions#create'
 
   # test route
   get '/hello', to: 'application#hello_world'

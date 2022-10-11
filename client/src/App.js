@@ -4,7 +4,8 @@ import {useEffect, useState} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import NavigationBar from './NavigationBar';
 import Home from './Home';
-import NewPlayer from './NewPlayer';
+import NewPlayer from './Components/NewPlayer';
+import LogIn from './Components/LogIn';
 
 function App() {
 
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path={"/signup"}>
             <NewPlayer />
+          </Route>
+          <Route path={"/login"}>
+            <LogIn />
           </Route>
           <Route path="/">
             <Home />

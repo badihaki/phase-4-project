@@ -10,6 +10,7 @@ function NavigationBar(){
             <h4>Navigation</h4>
             <Link to={"/"}> Home </Link>
             <Link to={"/signup"}> Sign Up </Link>
+            <Link to={"/login"}> Log In </Link>
         </div>
     )
 }
