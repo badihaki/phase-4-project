@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  
+  # auth paths
+  get '/me', to: 'users#show'
+
+  # test route
   get '/hello', to: 'application#hello_world'
 
   get '*path',
