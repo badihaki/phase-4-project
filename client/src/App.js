@@ -2,7 +2,7 @@ import './App.css';
 import {useEffect, useState} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import NavigationBar from './NavigationBar';
-import Home from './Home';
+import Home from './Components/Home';
 import NewPlayer from './Components/NewPlayer';
 import LogIn from './Components/LogIn';
 
