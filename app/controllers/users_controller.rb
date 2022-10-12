@@ -12,12 +12,9 @@ class UsersController < ApplicationController
             else
                 render json: {error: "Not logged in"}, status: :unauthorized
             end
-        else
-            user = find_user
-            render json: user, status: :ok
+        end
         rescue ActiveRecord::RecordNotFound
             render json: {error: "User Not Found"}
-        end
     end
 
     def create

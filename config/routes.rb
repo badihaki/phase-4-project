@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users, only: [:index, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # auth paths
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
-  destroy '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
 
   # test route
   get '/hello', to: 'application#hello_world'

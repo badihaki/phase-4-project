@@ -66,7 +66,8 @@ Things you may want to cover:
 	- belongs to console
 * Session - join table
     - params:
-        - session_creator
+        XX - session_creator XX
+        - name (???)
         - game_id
         - console_id
 	- belongs to console - get via API through 'game'
