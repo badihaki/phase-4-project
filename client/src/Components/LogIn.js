@@ -12,7 +12,30 @@ function LogIn(){
         //
         e.preventDefault();
         console.log(user)
-        clearForm()
+        clearForm();
+        fetch("/login",{
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(user)
+        }).then(
+            r=>{
+                if(r.ok){
+                    r.json().then(data=>{
+                        loginSuccessful(data);
+                    })
+                }
+                else{
+                    console.log("login unsuccessful, invalid email or pass or something else...");
+                }
+            }
+        )
+    }
+
+    function loginSuccessful(data){
+        console.log("login successful, data below");
+        console.log(data);
     }
 
     function clearForm(){
