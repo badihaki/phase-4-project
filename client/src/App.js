@@ -8,6 +8,7 @@ import LogIn from './Components/Player/LogIn';
 import { UserContext } from './Context/UserContext';
 import Profile from './Components/Player/Profile';
 import UpdatePlayerForm from './Components/Player/UpdatePlayerForm';
+import GamesList from './Components/Games/GameList';
 
 function App() {
 
@@ -41,6 +42,9 @@ function App() {
           </Route>
           {/* test routes end here */}
 
+          <Route path={"/gamelist"}>
+            <GamesList />
+          </Route>
           <Route path={"/updateplayer"}>
             <UpdatePlayerForm />
           </Route>

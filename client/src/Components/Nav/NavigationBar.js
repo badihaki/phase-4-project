@@ -18,8 +18,11 @@ function NavigationBar(){
 
     return(
         <div>
-            <h4>Navigation</h4>
-            <Link to={"/"}> Home </Link>
+            <span>
+                <h4>Navigation</h4>
+                <Link to={"/"}> Home </Link>
+                <Link to={"/gamelist"}> Games </Link>
+            </span>
             <span>
                 { user? <MiniProfileContainer /> : <Link to={"/signup"}><button> Sign Up </button></Link> }
                 <LoginLogoutButton />

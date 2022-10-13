@@ -40,6 +40,15 @@ Things you may want to cover:
 	- Sign/Log out
 	- User should only be able to edit and delete resources in they are logged in and creator of that resource
 
+### Set Up
+In order to run the servers, run these commands in order:
+- Start the Postgresql server:
+    $ sudo service postgresql start
+- Start rails server
+    $ rails s
+- Start npm server
+    $ npm start --prefix client
+
 # LFG - Looking for Group
 ## Models
 * Players (Users)
