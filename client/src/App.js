@@ -5,6 +5,7 @@ import NavigationBar from './NavigationBar';
 import Home from './Components/Home';
 import NewPlayer from './Components/NewPlayer';
 import LogIn from './Components/LogIn';
+import { UserProvider } from './Context/UserContext';
 
 function App() {
 
@@ -18,26 +19,28 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
-        <NavigationBar />
-        <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
-          </Route>
-          <Route path="/count" >
-            <h1>Page count = {count}</h1>
-          </Route>
-          <Route path={"/signup"}>
-            <NewPlayer />
-          </Route>
-          <Route path={"/login"}>
-            <LogIn />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+      <UserProvider>
+        <div className="App">
+          <NavigationBar />
+          <Switch>
+            <Route path="/testing">
+              <h1>Test Route</h1>
+            </Route>
+            <Route path="/count" >
+              <h1>Page count = {count}</h1>
+            </Route>
+            <Route path={"/signup"}>
+              <NewPlayer />
+            </Route>
+            <Route path={"/login"}>
+              <LogIn />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </UserProvider>
     </BrowserRouter>
   );
 }

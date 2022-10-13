@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from 'react';
+import { UserContext } from "../Context/UserContext";
 
 function LogIn(){
 
-    const [user, setUser] = useState({
+    const [userLoginForm, setUserLoginForm] = useState({
         "email":"",
         "password":""
     })
+    const { setUser } = useContext(UserContext);
 
     function onSubmit(e){
         //
         e.preventDefault();
-        console.log(user)
+        console.log(userLoginForm)
         clearForm();
         fetch("/login",{
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(userLoginForm)
         }).then(
             r=>{
                 if(r.ok){
                     r.json().then(data=>{
                         loginSuccessful(data);
+                        setUser(data);
                     })
                 }
                 else{
@@ -43,15 +46,15 @@ function LogIn(){
             "email":"",
             "password":""
         }
-        setUser(newUser);
+        setUserLoginForm(newUser);
     }
 
     function handleFormChange(e){
         const key = e.target.name;
         const value = e.target.value;
-        const newUser = {...user}
+        const newUser = {...userLoginForm}
         newUser[key] = value;
-        setUser(newUser);
+        setUserLoginForm(newUser);
     }
 
     return(
@@ -60,11 +63,11 @@ function LogIn(){
             <form onSubmit={onSubmit}>
                 Email
                 <br />
-                <input type={"email"} name="email" value={user.email} onChange={handleFormChange} />
+                <input type={"email"} name="email" value={userLoginForm.email} onChange={handleFormChange} />
                 <br />
                 Password
                 <br />
-                <input type={"password"} name="password" value={user.password} onChange={handleFormChange} />
+                <input type={"password"} name="password" value={userLoginForm.password} onChange={handleFormChange} />
                 <button type="Submit">Log In</button>
             </form>
         </div>

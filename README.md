@@ -42,12 +42,6 @@ Things you may want to cover:
 
 # LFG - Looking for Group
 ## Models
-* Console
-    - params:
-        - name
-	- have many games
-	- have many sessions, through games
-	- have many players, through games
 * Players (Users)
     - parms:
         - email
@@ -55,24 +49,32 @@ Things you may want to cover:
         - nickname
         - bio
 	- have many games
-	- has many sessions
+	- has many group requests
+    - has many groups through group requests
 * Games
     - params:
         - console_id
         - name
         - genre
-	- have many sessions
-	- has many players
-	- belongs to console
-* Session - join table
+	- have many groups
+	- has many players, through groups
+* Group
+    - params:
+        - name
+        - game_id
+    belongs to game
+    has many group requests
+    has many players through group requests
+* Group Request - join table
+    - Joings player to group
     - params:
         XX - session_creator XX
-        - name (???)
-        - game_id
-        - console_id
-	- belongs to console - get via API through 'game'
-	- belongs to game - user submittable
-	- has many players, through game
+        - game_id -- user submittable
+        - user_id
+        - request_message (string) -- user submittable
+	- belongs to group
+    - belonggs to user
+    - belongs to game
 ## Controllers
 * Console
     - Create
@@ -160,3 +162,6 @@ Things you may want to cover:
                 - Session creator is logged in player
                 - Console is game.console
 * password for admin is lifeink
+
+### TODO ::
+- nav bar needs to switch between components when a user is logged in vs logged out
