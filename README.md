@@ -166,4 +166,4 @@ Things you may want to cover:
 * password for admin is lifeink
 
 ### TODO ::
-- nav bar needs to switch between components when a user is logged in vs logged out
+- 'Games' model and controller works. Need to connect it to the front-end
