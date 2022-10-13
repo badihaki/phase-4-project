@@ -5,13 +5,11 @@ class UsersController < ApplicationController
     end
 
     def show
-        if(session[:user_id])
-            user = User.find_by(id: session[:user_id])
-            if user
-                render json: user, status: :ok
-            else
-                render json: {error: "Not logged in"}, status: :unauthorized
-            end
+        user = User.find_by(id: session[:user_id])
+        if user
+            render json: user, status: :ok
+        else
+            render json: {error: "Not logged in"}, status: :unauthorized
         end
         rescue ActiveRecord::RecordNotFound
             render json: {error: "User Not Found"}

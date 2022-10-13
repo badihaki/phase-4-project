@@ -24,9 +24,11 @@ function LoginLogoutButton(){
     }
     function LogOutButton(){
         return (
-            <button onClick={logOut}>
-                Log Out
-            </button>
+            <Link to={"/"}>
+                <button onClick={logOut}>
+                    Log Out
+                </button>
+            </Link>
 
         )
     }

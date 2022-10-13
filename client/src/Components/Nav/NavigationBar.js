@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 import MiniProfile from "../Player/MiniProfile";
@@ -8,7 +8,7 @@ function NavigationBar(){
     // will need to fetch to /me
     // will need state to determine if user is logged in
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     function MiniProfileContainer(){
         return(

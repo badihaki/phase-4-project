@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useState } from 'react';
-import { UserContext } from "../Context/UserContext";
+import { UserContext } from "../../Context/UserContext";
+import Profile from "./Profile";
 
 function LogIn(){
 
@@ -8,7 +9,8 @@ function LogIn(){
         "email":"",
         "password":""
     })
-    const { setUser } = useContext(UserContext);
+
+    const { user, setUser } = useContext(UserContext);
 
     function onSubmit(e){
         //
@@ -57,19 +59,39 @@ function LogIn(){
         setUserLoginForm(newUser);
     }
 
+    function LoginFormComponent(){
+        return(
+            <div>
+                Login
+                <form onSubmit={onSubmit}>
+                    Email
+                    <br />
+                    <input type={"email"} name="email" value={userLoginForm.email} onChange={handleFormChange} />
+                    <br />
+                    Password
+                    <br />
+                    <input type={"password"} name="password" value={userLoginForm.password} onChange={handleFormChange} />
+                    <button type="Submit">Log In</button>
+                </form>
+            </div>
+        )
+    }
+
     return(
-        <div>
-            Login
-            <form onSubmit={onSubmit}>
-                Email
-                <br />
-                <input type={"email"} name="email" value={userLoginForm.email} onChange={handleFormChange} />
-                <br />
-                Password
-                <br />
-                <input type={"password"} name="password" value={userLoginForm.password} onChange={handleFormChange} />
-                <button type="Submit">Log In</button>
-            </form>
+        <div>{user? <Profile /> : 
+            <div>
+                Login
+                <form onSubmit={onSubmit}>
+                    Email
+                    <br />
+                    <input type={"email"} name="email" value={userLoginForm.email} onChange={handleFormChange} />
+                    <br />
+                    Password
+                    <br />
+                    <input type={"password"} name="password" value={userLoginForm.password} onChange={handleFormChange} />
+                    <button type="Submit">Log In</button>
+                </form>
+            </div> }
         </div>
     )
 }

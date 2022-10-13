@@ -163,7 +163,9 @@ Things you may want to cover:
                 - Select a game from dropdown menu
                 - Session creator is logged in player
                 - Console is game.console
-* password for admin is lifeink
+* password for admin is admin0089
+* password for admin is lifeink with local db
 
 ### TODO ::
 - 'Games' model and controller works. Need to connect it to the front-end
+- logging in causes unfocus on keystroke. No doubt this is because it is checking for user. Find out how to many it stop

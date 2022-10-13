@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function NewPlayer(){
-    const [user, setNewUser] = useState({
+    const [userForm, setUserForm] = useState({
         "email":"",
         "password":"",
         "password_confirmation":"",
@@ -11,13 +11,13 @@ function NewPlayer(){
 
     function onSubmit(e){
         e.preventDefault();
-        console.log(user);
+        console.log(userForm);
         fetch("/users",{
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(userForm)
         }).then(
             (r) => r.json()
             ).then(
@@ -30,9 +30,9 @@ function NewPlayer(){
     function handleFormChange(e){
         const key = e.target.name;
         const value = e.target.value;
-        const newUser = {...user}
+        const newUser = {...userForm}
         newUser[key] = value;
-        setNewUser(newUser);
+        setUserForm(newUser);
     }
 
     return(
