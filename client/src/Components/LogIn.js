@@ -14,7 +14,6 @@ function LogIn(){
         //
         e.preventDefault();
         console.log(userLoginForm)
-        clearForm();
         fetch("/login",{
             method: "POST",
             headers: {
@@ -34,6 +33,7 @@ function LogIn(){
                 }
             }
         )
+        clearForm();
     }
 
     function loginSuccessful(data){

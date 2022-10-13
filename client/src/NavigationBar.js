@@ -6,25 +6,40 @@ function NavigationBar(){
     // will need to fetch to /me
     // will need state to determine if user is logged in
 
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     function LoginLogoutButton(){
-        function handleClick(e){
-            e.preventDefault();
-            if(user){
-                return <Link to={"/login"} />
-            }
-            else{
-                logOut();
-            }
-        }
 
         function logOut(){
-            console.log("logout//delete");
+            // console.log("logout//delete");
+            fetch("/logout",{
+                method: "DELETE"
+            }).then( ()=> {
+                console.log("setting user to null");
+                setUser(null)
+                // debugger;
+            })
+            return <Link to={"/"} />
+        }
+
+        function LogInButton(){
+            return (
+                <Link to={"/login"}>
+                    <button> Log In </button>
+                </Link>
+            )
+        }
+        function LogOutButton(){
+            return (
+                <button onClick={logOut}>
+                    Log Out
+                </button>
+
+            )
         }
 
         return(
-            <button onClick={handleClick}>{ user? "Login":"Logout" }</button>
+            <span>{user? <LogOutButton /> : <LogInButton /> }</span>
         )
     }
 
@@ -32,8 +47,7 @@ function NavigationBar(){
         <div>
             <h4>Navigation</h4>
             <Link to={"/"}> Home </Link>
-            <Link to={"/signup"}> Sign Up </Link>
-            <Link to={"/login"}> Log In </Link>
+            { user? "" : <Link to={"/signup"}> Sign Up </Link> }
             <LoginLogoutButton />
         </div>
     )
