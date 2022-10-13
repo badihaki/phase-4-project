@@ -37,6 +37,9 @@ function Profile(){
                 <br />
                 {user.bio}
             </div>
+            <br />
+            <br />
+            <Link to={"/updateplayer"}><button>Update Profile</button></Link>
         </div>
         )
     }
