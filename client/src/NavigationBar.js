@@ -11,11 +11,9 @@ function NavigationBar(){
     function LoginLogoutButton(){
 
         function logOut(){
-            // console.log("logout//delete");
             fetch("/logout",{
                 method: "DELETE"
             }).then( ()=> {
-                console.log("setting user to null");
                 setUser(null)
                 // debugger;
             })

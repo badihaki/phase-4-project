@@ -53,7 +53,6 @@ Things you may want to cover:
     - has many groups through group requests
 * Games
     - params:
-        - console_id
         - name
         - genre
 	- have many groups
@@ -61,6 +60,7 @@ Things you may want to cover:
 * Group
     - params:
         - name
+        - message
         - game_id
     belongs to game
     has many group requests
@@ -76,25 +76,27 @@ Things you may want to cover:
     - belonggs to user
     - belongs to game
 ## Controllers
-* Console
-    - Create
-    - Read
 * Players/Users
     - Create
         - 'create_params' method to permit certain parameters
     - Read
+        - Show action through '/me' route for user profile
     - Update
-        - 'update_params' method to permit all permittable params
+        - 'update_params' method to permit bio and nickname
 * Games
     - Create
+        - 'create_params' nmethod to permit name and genre
     - Read
+        - index and show route
     - Delete
-        - include sessions
-* Session
+        - include group requests
+* Group
     - Create
     - Read
     - Update
+        - 'update_params' method to permit update to name and message
     - Delete
+        - include group requests
 ## Components
 * App
     - Base app
