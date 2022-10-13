@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find_by(id: session[:user_id])
+        user = find_with_session()
         if user
             render json: user, status: :ok
         else
@@ -22,10 +22,22 @@ class UsersController < ApplicationController
         render json: {errors: error.record.errors}
     end
 
+    def update
+        user = find_with_session()
+        user.update!(update_params)
+        render json: user, status: :accepted
+    rescue ActiveRecord::RecordInvalid => error
+        render json: {errors: error.record.errors}
+    end
+
     private
 
     def find_user
         User.find(params[:id])
+    end
+
+    def find_with_session
+        User.find_by(id: session[:user_id])
     end
 
     def create_params
@@ -33,7 +45,7 @@ class UsersController < ApplicationController
     end
 
     def update_params
-        params.permit(:bio)
+        params.permit(:nickname, :bio)
     end
 
 end

@@ -30,6 +30,13 @@ function Profile(){
             <br />
             <button onClick={handleEmailButtonClick} >{ showEmail? "Hide Email" : "Show Email" }</button>
             {showEmail? <EmailComponent /> : ""}
+            <br />
+            <div>
+                <br />
+                Player Bio:
+                <br />
+                {user.bio}
+            </div>
         </div>
         )
     }
