@@ -168,4 +168,3 @@ Things you may want to cover:
 
 ### TODO ::
 - 'Games' model and controller works. Need to connect it to the front-end
-- logging in causes unfocus on keystroke. No doubt this is because it is checking for user. Find out how to many it stop
