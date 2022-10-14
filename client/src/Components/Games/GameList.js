@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
 import GameMiniCard from "./GameMiniCard";
+import NewGameForm from "./NewGameForm";
 
 function GamesList(){
 
@@ -22,7 +23,8 @@ function GamesList(){
         <div>
             <h1>Games</h1>
             <p>
-                Here is a list of games {user? ", as well as the ability to add a game.":"." }
+                Here is a list of games{user? ", as well as the ability to add a game.":"." }
+                {user? <NewGameForm /> : "" }
             </p>
                 <br />
             <h2>List of games</h2>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 
@@ -11,6 +11,8 @@ function UpdatePlayerForm(){
     })
 
     const { user, setUser } = useContext(UserContext)
+
+    const [userUpdated, setUserUpdated] = useState(false);
 
     function handleFormInput(e){
         const key = e.target.name;
@@ -53,7 +55,22 @@ function UpdatePlayerForm(){
             "bio": "",
             "id": user.id
         }
+        setUserUpdated(true);
         setUpdateFormValues(obj);
+    }
+
+    function UpdateMessage(){
+        return(
+            <p>
+                "Successfully updated user"
+            </p>
+        )
+    }
+
+    function resetMessage(){
+        if(userUpdated){
+            setUserUpdated(false);
+        }
     }
 
 
@@ -71,8 +88,12 @@ function UpdatePlayerForm(){
                     <br />
                     <input type={"text"} name={"bio"} value={updateFormValues.bio} onChange={handleFormInput} />
                     <br />
-                    <button type="Submit"> Submit </button> or <Link to={"/profile"}><button> Back </button></Link>
+                    <button type="Submit"> Submit </button> or <Link to={"/profile"}><button onClick={resetMessage}> Back </button></Link>
                 </form>
+                <br />
+                <br />
+                <br />
+                {userUpdated? <UpdateMessage /> : ""}
             </div>
         </div>
     )

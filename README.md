@@ -177,3 +177,6 @@ In order to run the servers, run these commands in order:
 
 ### TODO ::
 - 'Games' model and controller works. Need to connect it to the front-end
+    - "Index" works through frontend
+    - Need to make "GamePage" to fetch data for individual games
+    - Need to make "NewGameForm" component to create a new game

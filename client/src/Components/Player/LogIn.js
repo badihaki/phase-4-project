@@ -59,26 +59,10 @@ function LogIn(){
         setUserLoginForm(newUser);
     }
 
-    function LoginFormComponent(){
-        return(
-            <div>
-                Login
-                <form onSubmit={onSubmit}>
-                    Email
-                    <br />
-                    <input type={"email"} name="email" value={userLoginForm.email} onChange={handleFormChange} />
-                    <br />
-                    Password
-                    <br />
-                    <input type={"password"} name="password" value={userLoginForm.password} onChange={handleFormChange} />
-                    <button type="Submit">Log In</button>
-                </form>
-            </div>
-        )
-    }
-
     return(
-        <div>{user? <Profile /> : 
+        <div>
+            { user?
+            <Profile />: 
             <div>
                 Login
                 <form onSubmit={onSubmit}>
