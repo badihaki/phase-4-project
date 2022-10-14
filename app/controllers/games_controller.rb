@@ -18,6 +18,12 @@ class GamesController < ApplicationController
         # render json: { errors: [e] }, status: :unprocessable_entity
     end
 
+    def update
+        game = find_game()
+        game.update!(permitted_params)
+        render json: game, status: :accepted
+    end
+
     def destroy
         game = find_game()
         game.destroy!
@@ -31,7 +37,7 @@ class GamesController < ApplicationController
     end
 
     def permitted_params
-        params.permit(:name, :genre)
+        params.permit(:name, :genre, :description)
     end
 
     def not_found_response
