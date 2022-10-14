@@ -45,8 +45,8 @@ function GamesList(){
                 {user? <NewGameForm addGame={postNewGame} /> : "" }
                 <br />
             <h2>List of games</h2>
-            <br />
             {gameCards}
+            <br />
         </div>
     )
 }

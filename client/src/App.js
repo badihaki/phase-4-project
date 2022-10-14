@@ -9,6 +9,7 @@ import { UserContext } from './Context/UserContext';
 import Profile from './Components/Player/Profile';
 import UpdatePlayerForm from './Components/Player/UpdatePlayerForm';
 import GamesList from './Components/Games/GameList';
+import GameCard from './Components/Games/GameCard';
 
 function App() {
 
@@ -41,7 +42,10 @@ function App() {
             <h1>Page count = {count}</h1>
           </Route>
           {/* test routes end here */}
-
+          {/* Real routes begin here */}
+          <Route exact path={"/gamelist/:id"}>
+                <GameCard />
+          </Route>
           <Route path={"/gamelist"}>
             <GamesList />
           </Route>
