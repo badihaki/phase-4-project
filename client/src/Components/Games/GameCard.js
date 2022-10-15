@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function GameCard(){
     const [game, setGame] = useState(null);
@@ -12,7 +12,19 @@ function GameCard(){
     function CardComponent(){
         return(
             <div>
-                <h4> {game.name} </h4>
+                <h2> {game.name} </h2>
+                <div>
+                    <p>
+                        {game.description}
+                    </p>
+                </div>
+                <div>
+                    ( {game.genre} )
+                </div>
+                <br />
+                <br />
+                <br />
+                <Link to={"/gamelist"} >Back to list</Link>
             </div>
         )
     }
