@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function GameUpdate( {game} ){
+function GameUpdate( {game, changeGameInfo} ){
 
     const [description, setDescription] = useState("");
 
@@ -11,9 +11,20 @@ function GameUpdate( {game} ){
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(description);
-        // instead of logging, we'll send the data back
-        setDescription("");
+        const gameObj = {
+            "description":description
+        }
+        fetch(`/games/${game.id}`,{
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(gameObj)
+        }).then(r => r.json() ).then( (data)=>{
+            changeGameInfo(data);
+            // game.description = description;
+            setDescription("");
+        })
     }
 
     return(

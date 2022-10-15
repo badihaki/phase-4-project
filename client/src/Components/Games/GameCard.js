@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GameUpdate from "./UpdateGame";
+import GameUpdate from "./GameUpdate";
 
 function GameCard(){
     const [game, setGame] = useState(null);
@@ -31,7 +31,7 @@ function GameCard(){
                 <br />
                 <button onClick={handleShowUpdateFormButton}>{ showForm? "Hide Form":"Change Description" }</button>
                 <br />
-                { showForm? <GameUpdate game={game} /> : "" }
+                { showForm? <GameUpdate game={game} changeGameInfo={setGame} /> : "" }
                 <br />
                 <br />
                 <Link to={"/gamelist"} >Back to list</Link>
