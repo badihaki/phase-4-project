@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
-import GameMiniCard from "./GameMiniCard";
+import GameMiniCard from "./GameCardMini";
 import NewGameForm from "./NewGameForm";
 
 function GamesList(){
@@ -10,7 +10,6 @@ function GamesList(){
     const [ games, setGames ] = useState([]);
     useEffect( ()=>{
         fetch("/games").then( r => r.json() ).then( (data)=>{
-            console.log(data);
             setGames(data);
         })
     }, [] )
