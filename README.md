@@ -64,6 +64,7 @@ In order to run the servers, run these commands in order:
     - params:
         - name
         - genre
+        - description
 	- have many groups
 	- has many players, through groups
 * Group
@@ -177,6 +178,3 @@ In order to run the servers, run these commands in order:
 
 ### TODO ::
 - 'Games' model and controller works. Need to connect it to the front-end
-    - Game mini cards need to link to individual game pages
-        - Use dynamic routing here
-    - Update on the Game Pages

@@ -1,0 +1,2 @@
+class GroupRequestsController < ApplicationController
+end

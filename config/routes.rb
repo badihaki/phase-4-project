@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :group_requests
+  resources :groups
   resources :users, only: [:index, :create, :update]
   resources :games
   #resources :games, only: [:create, :index, :show, :destroy]
