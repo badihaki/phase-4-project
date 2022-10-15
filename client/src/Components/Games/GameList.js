@@ -45,6 +45,7 @@ function GamesList(){
                 {user? <NewGameForm addGame={postNewGame} /> : "" }
                 <br />
             <h2>List of games</h2>
+            {user? "": "Sign up or log in to view more info for each game"}
             {gameCards}
             <br />
         </div>
