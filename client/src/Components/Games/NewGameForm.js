@@ -3,46 +3,43 @@ import GenreDropdown from "./GenreDropdown";
 
 function NewGameForm( {addGame} ){
 
-    const [ gameName, setGameName ] = useState("");
-    const [ gameGenre, setGameGenre ] = useState("");
-
-    function handleNameChange(e){
-        const value = e.target.value;
-        setGameName(value);
-    }
-
-    function handleGenreChange(e){
-        const value = e.target.value;
-        setGameGenre(value);
-    }
+    const [ gameObj, setGameObj ] = useState({
+        "name": "",
+        "genre": "",
+        "description":""
+    })
 
     function clearForm(){
-        const gameObj = {
+        const replacementGameObj = {
             "name": "",
-            "genre": ""
+            "genre": "",
+            "description":""
         }
-        setGameName(gameObj.name);
-        setGameGenre(gameObj.genre);
+        setGameObj(replacementGameObj);
     }
 
     function handleSubmit(e){
         e.preventDefault();
-        const gameObj = {
-            "name": gameName,
-            "genre": gameGenre
-        }
         clearForm();
-        
         addGame(gameObj);
-        
+    }
+
+    function handleChange(e){
+        const key = e.target.name;
+        const value = e.target.value;
+        const replacementGameObj = {...gameObj};
+        replacementGameObj[key] = value;
+        setGameObj(replacementGameObj);
     }
 
     return(
         <div>
             <form onSubmit={handleSubmit}>
-                <input name="name" placeholder="Game Name" value={gameName} onChange={handleNameChange} />
+                <input name="name" placeholder="Game Name" value={gameObj.name} onChange={handleChange} />
                 <br />
-                <GenreDropdown genre={gameGenre} handleGenreChange={handleGenreChange} />
+                <input name="description" placeholder="Game Description" value={gameObj.description} onChange={handleChange} />
+                <br />
+                <GenreDropdown genre={gameObj.genre} handleGenreChange={handleChange} />
                 <br />
                 <br />
                 <button type="submit">Add game</button>

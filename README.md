@@ -78,7 +78,6 @@ In order to run the servers, run these commands in order:
 * Group Request - join table
     - Joings player to group
     - params:
-        XX - session_creator XX
         - game_id -- user submittable
         - user_id
         - request_message (string) -- user submittable
@@ -177,4 +176,10 @@ In order to run the servers, run these commands in order:
 * password for admin is lifeink with local db
 
 ### TODO ::
-- 'Games' model and controller works. Need to connect it to the front-end
+- All models are complete
+    - Complete routes for groups and group_requests
+- Make a Groups component and a Groups Request component
+    * GROUP REQUESTS
+        - send games down to group requests as props
+    - search bar that automatically finds results as user types in query
+        - Try to make it reusable in groups and group requests -- keep it DRY

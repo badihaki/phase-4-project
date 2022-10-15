@@ -8,7 +8,7 @@ function GenreDropdown( { genre, handleGenreChange } ){
 
     return(
         <div>
-            <select value={genre} onChange={handleChange}>
+            <select name="genre" value={genre} onChange={handleChange}>
                 <option value={""}>Genre</option>
                 <option value={"Arcade"}>Arcade</option>
                 <option value={"Fighting"}>Fighting</option>
