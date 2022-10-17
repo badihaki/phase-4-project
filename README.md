@@ -97,15 +97,23 @@ In order to run the servers, run these commands in order:
         - 'create_params' nmethod to permit name and genre
     - Read
         - index and show route
+    - Update
+        - Only Description
     - Delete
         - include group requests
 * Group
     - Create
+        - 'create_params' are :name, :message, :game_id
     - Read
+        - include players through group_requests
+        - Show and Index
     - Update
         - 'update_params' method to permit update to name and message
     - Delete
         - include group requests
+* Group_Requests
+    - Create
+        - 'create_params' = game_id, player_id, request_message
 ## Components
 * App
     - Base app
