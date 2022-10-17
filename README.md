@@ -186,10 +186,10 @@ In order to run the servers, run these commands in order:
 * password for admin is lifeink with local db
 
 ### TODO ::
-- All models are complete
-    - Complete routes for groups and group_requests
-- Make a Groups component and a Groups Request component
-    * GROUP REQUESTS
-        - send games down to group requests as props
-    - search bar that automatically finds results as user types in query
-        - Try to make it reusable in groups and group requests -- keep it DRY
+- Make Group Request Card and New Request components
+    - New Request
+        - child component of group card, so you can see all requests per card
+        - 'Group[x].group_requests' maybe?
+    - Group Request Card
+        - simply show the right name for the right game, and show their message
+        - 'GroupRequest[x].user'??

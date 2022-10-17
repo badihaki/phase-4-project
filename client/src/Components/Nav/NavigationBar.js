@@ -20,9 +20,9 @@ function NavigationBar(){
         <div>
             <span>
                 <h4>Navigation</h4>
-                <Link to={"/"}> Home </Link>
-                <Link to={"/gamelist"}> Games </Link>
-                { user? <Link to={"/groups"}> List of Active Groups </Link> : "" }
+                <Link to={"/"}> Home </Link> ~|~
+                <Link to={"/gamelist"}> Games </Link> ~|~
+                { user? <span><Link to={"/grouplist"}> List of Active Groups </Link> ~|~</span> : "" }
             </span>
             <span>
                 { user? <MiniProfileContainer /> : <Link to={"/signup"}><button> Sign Up </button></Link> }

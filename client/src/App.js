@@ -17,8 +17,9 @@ import NewGroupForm from './Components/Groups/NewGroupForm';
 function App() {
 
   const { setUser } = useContext(UserContext);
-  const [ players, setPlayers] = useState([])
-  const [ games, setGames ] = useState([]);
+  const [ players, setPlayers] = useState(null)
+  const [ games, setGames ] = useState(null);
+  const [groups, setGroups] = useState(null);
 
   useEffect( ()=>{
     fetch("/users").then(r=>r.json() ).then( (data)=>{
@@ -31,6 +32,27 @@ function App() {
           setGames(data);
       })
   }, [] )
+
+  useEffect( ()=>{
+    fetch("/groups").then(r=>r.json()).then(data=>setGroups(data));
+},[] )
+
+function postNewGroup(group){
+    fetch("/groups",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(group)
+    }).then(r=>{
+        if(r.ok){
+            r.json().then(data=>{
+                const newGroupsList = [...groups, data];
+                setGroups(newGroupsList);
+            })
+        }
+    })
+}
 
   function postNewGame(gameObj){
       fetch("/games",{
@@ -64,31 +86,31 @@ function App() {
         <NavigationBar />
         <Switch>
           {/* Real routes begin here */}
-          <Route path={"/groupform"}>
+          <Route exact path={"/groupform"}>
             <NewGroupForm />
           </Route>
-          <Route path={"/groups"}>
-            <GroupList players={players} games={games} />
+          <Route exact path={"/grouplist"}>
+            <GroupList groups={groups} players={players} games={games} />
           </Route>
           <Route exact path={"/gamelist/:id"}>
-                <GameCard />
+                <GameCard createGroup={postNewGroup} />
           </Route>
-          <Route path={"/gamelist"}>
+          <Route exact path={"/gamelist"}>
             <GamesList games={games} postGames={postNewGame} />
           </Route>
-          <Route path={"/updateplayer"}>
+          <Route exact path={"/updateplayer"}>
             <UpdatePlayerForm />
           </Route>
-          <Route path={"/profile"}>
+          <Route exact path={"/profile"}>
             <Profile />
           </Route>
-          <Route path={"/signup"}>
+          <Route exact path={"/signup"}>
             <NewPlayer />
           </Route>
-          <Route path={"/login"}>
+          <Route exact path={"/login"}>
             <LogIn />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>
