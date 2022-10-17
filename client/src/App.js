@@ -11,12 +11,20 @@ import UpdatePlayerForm from './Components/Player/UpdatePlayerForm';
 import GamesList from './Components/Games/GameList';
 import GameCard from './Components/Games/GameCard';
 import NavigationFooter from './Components/Nav/NavigationFooter';
+import GroupList from './Components/Groups/GroupList';
+import NewGroupForm from './Components/Groups/NewGroup';
 
 function App() {
 
-  const [count, setCount] = useState(0);
   const { setUser } = useContext(UserContext);
+  const [ players, setPlayers] = useState([])
   const [ games, setGames ] = useState([]);
+
+  useEffect( ()=>{
+    fetch("/users").then(r=>r.json() ).then( (data)=>{
+      setPlayers(data);
+    })
+  }, [] )
 
   useEffect( ()=>{
       fetch("/games").then( r => r.json() ).then( (data)=>{
@@ -40,13 +48,6 @@ function App() {
           }
       })
   }
-/*
-  useEffect( ()=>{
-    fetch("/hello").then( (r) => r.json() ).then((data) => {
-      setCount(data.count);
-    })
-  }, [])
-  */
 
   useEffect( ()=>{
     fetch("/me").then( (r) => {
@@ -62,14 +63,13 @@ function App() {
       <div className="App">
         <NavigationBar />
         <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
-          </Route>
-          <Route path="/count" >
-            <h1>Page count = {count}</h1>
-          </Route>
-          {/* test routes end here */}
           {/* Real routes begin here */}
+          <Route path={"/groupform"}>
+            <NewGroupForm />
+          </Route>
+          <Route path={"/groups"}>
+            <GroupList players={players} games={games} />
+          </Route>
           <Route exact path={"/gamelist/:id"}>
                 <GameCard />
           </Route>
