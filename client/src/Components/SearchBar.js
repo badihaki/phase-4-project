@@ -1,10 +1,10 @@
 import React from "react";
 
-function GameSearchBar( { result, setResult } ){
+function GameSearchBar( { searchingFor, result, setResult } ){
     return(
         <div>
             <form>
-                Search by Game Name
+                Search by {searchingFor} Name
                 <br />
                 <form>
                     <input type={"text"} name={"name"} placeholder={"Enter name here"} value={result} onChange={setResult} />

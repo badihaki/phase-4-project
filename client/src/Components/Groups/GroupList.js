@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import GameSearchBar from "../GameSearchBar";
+import GameSearchBar from "../SearchBar";
+import NewGroupForm from "./NewGroupForm";
 
 function GroupList({ games, players }){
 
     const [searchResults, setSearchResults] = useState("");
+    const [showForm, setShowForm] = useState(false);
 
     function handleSearch(e){
         setSearchResults(e.target.value);
@@ -11,10 +13,17 @@ function GroupList({ games, players }){
 
     return(
         <div>
+            Want to make a new group?
+            <br />
+            <button onClick={()=>setShowForm(!showForm)}>{showForm? "No...":"Yes!!"}</button>
+            <br />
+            {showForm? <NewGroupForm />:""}
+            <br />
             List of groups
             <br />
-            <GameSearchBar result={searchResults} setResult={handleSearch} />
+            <GameSearchBar searchingFor={"Game"} result={searchResults} setResult={handleSearch} />
             <br />
+            List goes here
         </div>
     )
 }

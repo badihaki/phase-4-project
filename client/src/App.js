@@ -12,7 +12,7 @@ import GamesList from './Components/Games/GameList';
 import GameCard from './Components/Games/GameCard';
 import NavigationFooter from './Components/Nav/NavigationFooter';
 import GroupList from './Components/Groups/GroupList';
-import NewGroupForm from './Components/Groups/NewGroup';
+import NewGroupForm from './Components/Groups/NewGroupForm';
 
 function App() {
 
