@@ -114,6 +114,8 @@ In order to run the servers, run these commands in order:
 * Group_Requests
     - Create
         - 'create_params' = game_id, player_id, request_message
+    - Read
+        - 'Index' and 'show' actions
 ## Components
 * App
     - Base app
