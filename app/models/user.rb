@@ -3,7 +3,7 @@ class User < ApplicationRecord
     
     # associations
     has_many :games
-    has_many :group_requests
+    has_many :group_requests, dependent: :destroy
     has_many :groups, through: :group_requests
 
     #validations

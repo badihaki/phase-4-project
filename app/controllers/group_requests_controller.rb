@@ -25,7 +25,7 @@ class GroupRequestsController < ApplicationController
     end
 
     def permitted_params
-        params.permit(:game_id, :user_id, :request_message)
+        params.permit(:game_id, :user_id, :request_message, :group_id)
     end
 
 end
