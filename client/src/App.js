@@ -20,6 +20,7 @@ function App() {
   const [ players, setPlayers] = useState(null)
   const [ games, setGames ] = useState(null);
   const [groups, setGroups] = useState(null);
+  const [groupRequests, setGroupRequests] = useState(null);
 
   useEffect( ()=>{
     fetch("/users").then(r=>r.json() ).then( (data)=>{
@@ -36,6 +37,23 @@ function App() {
   useEffect( ()=>{
     fetch("/groups").then(r=>r.json()).then(data=>setGroups(data));
 },[] )
+
+  useEffect( ()=>{
+    fetch("/group_requests").then(r=>r.json()).then(data=>setGroupRequests(data));
+  },[])
+
+  function postNewRequestToGroup(request){
+    fetch("/group_requests",{
+      method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(request)
+    }).then(r=>r.json()).then(data=>{
+      const newRequests = {...groupRequests, data};
+      setGroupRequests(newRequests);
+    })
+  }
 
 function postNewGroup(group){
     fetch("/groups",{
@@ -90,7 +108,7 @@ function postNewGroup(group){
             <NewGroupForm />
           </Route>
           <Route exact path={"/grouplist"}>
-            <GroupList groups={groups} players={players} games={games} />
+            <GroupList groups={groups} players={players} games={games} newRequest={postNewRequestToGroup} />
           </Route>
           <Route exact path={"/gamelist/:id"}>
                 <GameCard createGroup={postNewGroup} />

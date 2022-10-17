@@ -3,7 +3,7 @@ import GameSearchBar from "../SearchBar";
 import GroupCard from "./GroupCard";
 import NewGroupForm from "./NewGroupForm";
 
-function GroupList({ groups, games, players }){
+function GroupList({ groups, newRequest, games, players }){
 
     const [searchResults, setSearchResults] = useState("");
 
@@ -19,7 +19,7 @@ function GroupList({ groups, games, players }){
             <GameSearchBar searchingFor={"Game"} result={searchResults} setResult={handleSearch} />
             <br />
             {groups? "List goes here":"Loading"}
-            <GroupCard group={groups[0]} />
+            <GroupCard group={groups[0]} newRequest={newRequest} />
         </div>
     )
 }

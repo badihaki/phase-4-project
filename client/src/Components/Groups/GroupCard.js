@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
 import NewRequestForm from "./NewRequestForm";
 
-function GroupCard( {group} ){
+function GroupCard( {group, newRequest} ){
 
     const [groupObj, setGroupObj] = useState(group);
     const [showForm, setShowForm] = useState(false);
@@ -15,7 +15,7 @@ function GroupCard( {group} ){
             "group_id":groupObj.id,
             "request_message": message
         }
-        console.log(newRequest);
+        newRequest(newRequest);
     }
 
     return(
