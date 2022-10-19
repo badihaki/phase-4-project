@@ -5,24 +5,26 @@ import NewGroupForm from "../Groups/NewGroupForm";
 
 function GameCard( {createGroup} ){
     const [game, setGame] = useState(null);
+    const [groups, setGroups] = useState([])
     const { id } = useParams()
     const [showForm, setShowForm] = useState(false);
     const [showGroupForm, setShowGroupForm] = useState(false);
 
     useEffect(()=>{
-        fetch(`/games/${id}`).then(r=>r.json()).then(data=>setGame(data));
-    },[])
+        fetch(`/games/${id}`).then(r=>r.json()).then(data=>{
+            setGame(data)
+            const groupList = data.groups.map((group)=>{
+                return(
+                    <h4>{group.name}<br /></h4>
+                )
+            });
+            setGroups(groupList);
+        })},[])
 
     function handleShowUpdateFormButton(){
         const result = !showForm;
         setShowForm(result);
     }
-
-    const groups=game.groups.map((group)=>{
-        return(
-            <h4>{group.name}<br /></h4>
-        )
-    })
 
     function CardComponent(){
         return(
