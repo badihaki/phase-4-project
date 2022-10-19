@@ -18,14 +18,33 @@ function GroupCard( {group, newRequest} ){
         newRequest(newRequest);
     }
 
+    /*
     const users = group.users.map((user)=>{
         return(
-            <li>{user.nickname}</li>
+            <li key={user.id}>
+                {user.nickname}
+                <br />
+            </li>
         )
     })
+    */
+
+    const users = group.users.map(user => {
+        const request = group.group_requests.find((req)=>{
+            return req.user_id === user.id;
+        })
+        return(
+            <li key={user.id}>
+                {user.nickname}
+                <br />
+                {request.request_message}
+            </li>
+        )
+    });
+
     const games = group.games.map( (game)=>{
         return(
-            <li>{game.name}</li>
+            <li key={game.id}>{game.name}</li>
         )
     })
 
