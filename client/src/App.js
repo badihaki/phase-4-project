@@ -56,6 +56,7 @@ function App() {
   }
 
 function postNewGroup(group){
+  console.log(group);
     fetch("/groups",{
         method: "POST",
         headers: {
@@ -108,7 +109,7 @@ function postNewGroup(group){
             <NewGroupForm />
           </Route>
           <Route exact path={"/grouplist"}>
-            <GroupList groups={groups} players={players} games={games} newRequest={postNewRequestToGroup} />
+            <GroupList groups={groups} postNewGroup={postNewGroup} players={players} games={games} newRequest={postNewRequestToGroup} />
           </Route>
           <Route exact path={"/gamelist/:id"}>
                 <GameCard createGroup={postNewGroup} />

@@ -23,7 +23,7 @@ class GroupsController < ApplicationController
     end
 
     def permitted_params
-        params.permit(:name, :message, :game_id)
+        params.permit(:name, :message)
     end
 
 end

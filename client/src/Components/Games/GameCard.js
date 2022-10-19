@@ -15,7 +15,7 @@ function GameCard( {createGroup} ){
             setGame(data)
             const groupList = data.groups.map((group)=>{
                 return(
-                    <h4>{group.name}<br /></h4>
+                    <h4 key={group.id}>{group.name}<br /></h4>
                 )
             });
             setGroups(groupList);
@@ -24,6 +24,11 @@ function GameCard( {createGroup} ){
     function handleShowUpdateFormButton(){
         const result = !showForm;
         setShowForm(result);
+    }
+
+    function createAndSetGroup(groupObj){
+        setGroups({...groups, groupObj});
+        createGroup(groupObj);
     }
 
     function CardComponent(){
@@ -52,7 +57,7 @@ function GameCard( {createGroup} ){
                 <br />
                 <button onClick={()=>setShowGroupForm(!showGroupForm)}>{showGroupForm? "No...":"Yes!!"}</button>
                 <br />
-                {showGroupForm? <NewGroupForm createGroup={createGroup} game={game} />:""}
+                {showGroupForm? <NewGroupForm createGroup={createAndSetGroup} game={game} />:""}
                 <br />
                 <Link to={"/gamelist"} >Back to list</Link>
             </div>

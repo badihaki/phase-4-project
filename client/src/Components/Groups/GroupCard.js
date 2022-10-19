@@ -9,13 +9,13 @@ function GroupCard( {group, newRequest} ){
     const {user} = useContext(UserContext);
 
     function createRequestAndSend(message){
-        const newRequest = {
+        const req = {
             "game_id":groupObj.game_id,
             "user_id":user.id,
             "group_id":groupObj.id,
             "request_message": message
         }
-        newRequest(newRequest);
+        newRequest(req);
     }
 
     /*

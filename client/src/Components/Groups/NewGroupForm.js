@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 
-function NewGroupForm( {createGroup, game} ){
+function NewGroupForm( {createGroup} ){
     
     const [groupObj, setGroupObj] = useState({
         "name":"",
         "message":"",
-        "game_id": game.id
     })
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(groupObj);
         createGroup(groupObj);
     }
 
