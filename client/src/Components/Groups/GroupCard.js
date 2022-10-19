@@ -18,10 +18,35 @@ function GroupCard( {group, newRequest} ){
         newRequest(newRequest);
     }
 
+    const users = group.users.map((user)=>{
+        return(
+            <li>{user.nickname}</li>
+        )
+    })
+    const games = group.games.map( (game)=>{
+        return(
+            <li>{game.name}</li>
+        )
+    })
+
     return(
         <div>
             <h3>{group.name}</h3>
             <h5>{group.message}</h5>
+            <div>
+                Our members:
+                <br />
+                <ul>
+                    {users}
+                </ul>
+            </div>
+            <div>
+                Games we play:
+                <ul>
+                    {games}
+                </ul>
+                <br />
+            </div>
             <div>
                 Request to join this group?
                 <br />

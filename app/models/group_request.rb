@@ -6,5 +6,5 @@ class GroupRequest < ApplicationRecord
     # validations
     validates :game_id, presence: true
     validates :user_id, presence: true
-    validates :request_message, presence: true,  length: { minimum: 20 }
+    validates :request_message, presence: true,  length: { minimum: 2 }
 end

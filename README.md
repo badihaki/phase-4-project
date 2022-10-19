@@ -193,3 +193,9 @@ In order to run the servers, run these commands in order:
     - Group Request Card
         - simply show the right name for the right game, and show their message
         - 'GroupRequest[x].user'??
+
+NOTES
+- make models make sense through join table
+- Take out unneccessary IDs
+- session hash for all create/update/delete actions
+    - current_user method to find current user from session hash
