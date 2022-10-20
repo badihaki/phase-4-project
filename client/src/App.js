@@ -112,7 +112,7 @@ function postNewGroup(group){
             <GroupList groups={groups} postNewGroup={postNewGroup} players={players} games={games} newRequest={postNewRequestToGroup} />
           </Route>
           <Route exact path={"/gamelist/:id"}>
-                <GameCard createGroup={postNewGroup} />
+                <GameCard groups={groups} />
           </Route>
           <Route exact path={"/gamelist"}>
             <GamesList games={games} postGames={postNewGame} />

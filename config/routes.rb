@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  resources :group_requests
-  resources :groups
+  resources :reviews
   resources :users, only: [:index, :create, :update]
-  resources :games
+  resources :games, only: [:index, :show, :destroy]
   #resources :games, only: [:create, :index, :show, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
