@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import GameUpdate from "./GameUpdate";
 
-function GameCard( {groups} ){
+function GameCard(){
     const [game, setGame] = useState(null);
     const { id } = useParams()
     const [showForm, setShowForm] = useState(false);
 
     useEffect(()=>{
         fetch(`/games/${id}`).then(r=>r.json()).then(data=>{
-            setGame(data);
+            console.log(data);
+            setGame(data)
         })},[])
 
     function handleShowUpdateFormButton(){

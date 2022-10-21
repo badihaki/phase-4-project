@@ -1,7 +1,7 @@
 class GameSerializer < ActiveModel::Serializer
   attributes :id, :name, :genre, :description
 
-  has_many :group_requests
-  has_many :groups, through: :group_requests
-  has_many :users, through: :group_requests
+  # associations
+  has_many :reviews, dependent: :destroy
+  has_many :users, through: :reviews
 end

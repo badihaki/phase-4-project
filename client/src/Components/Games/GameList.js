@@ -17,8 +17,8 @@ function GamesList( { games, postGames } ){
             <p>
                 Here is a list of games{user? ", as well as the ability to add a game.":"." }
             </p>
-                {user? <NewGameForm addGame={postGames} /> : "" }
-                <br />
+            {user? <NewGameForm addGame={postGames} /> : "" }
+            <br />
             <h2>List of games</h2>
             {user? "": "Sign up or log in to view more info for each game"}
             {gameCards}

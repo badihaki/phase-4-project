@@ -199,3 +199,7 @@ NOTES
 - Take out unneccessary IDs
 - session hash for all create/update/delete actions
     - current_user method to find current user from session hash
+ - Remember - the backend is the keeper of the logged in user.
+    - The frontend doesn’t need to tell the backend who is logged in!  The backend just checks the session hash!
+- Also don’t forget to use the user’s ASSOCIATIONS to limit the access to only their stuff.
+    - If a user has many books, I should in the backend be finding the user (using the id from the session hash) and returning THAT user’s books (current_user.books - that is one of the collection methods)

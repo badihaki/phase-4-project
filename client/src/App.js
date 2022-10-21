@@ -11,16 +11,12 @@ import UpdatePlayerForm from './Components/Player/UpdatePlayerForm';
 import GamesList from './Components/Games/GameList';
 import GameCard from './Components/Games/GameCard';
 import NavigationFooter from './Components/Nav/NavigationFooter';
-import GroupList from './Components/Groups/GroupList';
-import NewGroupForm from './Components/Groups/NewGroupForm';
 
 function App() {
 
   const { setUser } = useContext(UserContext);
   const [ players, setPlayers] = useState(null)
   const [ games, setGames ] = useState(null);
-  const [groups, setGroups] = useState(null);
-  const [groupRequests, setGroupRequests] = useState(null);
 
   useEffect( ()=>{
     fetch("/users").then(r=>r.json() ).then( (data)=>{
@@ -33,45 +29,6 @@ function App() {
           setGames(data);
       })
   }, [] )
-
-  useEffect( ()=>{
-    fetch("/groups").then(r=>r.json()).then(data=>setGroups(data));
-},[] )
-
-  useEffect( ()=>{
-    fetch("/group_requests").then(r=>r.json()).then(data=>setGroupRequests(data));
-  },[])
-
-  function postNewRequestToGroup(request){
-    fetch("/group_requests",{
-      method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(request)
-    }).then(r=>r.json()).then(data=>{
-      const newRequests = {...groupRequests, data};
-      setGroupRequests(newRequests);
-    })
-  }
-
-function postNewGroup(group){
-  console.log(group);
-    fetch("/groups",{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(group)
-    }).then(r=>{
-        if(r.ok){
-            r.json().then(data=>{
-                const newGroupsList = [...groups, data];
-                setGroups(newGroupsList);
-            })
-        }
-    })
-}
 
   function postNewGame(gameObj){
       fetch("/games",{
@@ -105,14 +62,8 @@ function postNewGroup(group){
         <NavigationBar />
         <Switch>
           {/* Real routes begin here */}
-          <Route exact path={"/groupform"}>
-            <NewGroupForm />
-          </Route>
-          <Route exact path={"/grouplist"}>
-            <GroupList groups={groups} postNewGroup={postNewGroup} players={players} games={games} newRequest={postNewRequestToGroup} />
-          </Route>
           <Route exact path={"/gamelist/:id"}>
-                <GameCard groups={groups} />
+                <GameCard />
           </Route>
           <Route exact path={"/gamelist"}>
             <GamesList games={games} postGames={postNewGame} />
