@@ -15,14 +15,7 @@ import NavigationFooter from './Components/Nav/NavigationFooter';
 function App() {
 
   const { setUser } = useContext(UserContext);
-  const [ players, setPlayers] = useState(null)
   const [ games, setGames ] = useState(null);
-
-  useEffect( ()=>{
-    fetch("/users").then(r=>r.json() ).then( (data)=>{
-      setPlayers(data);
-    })
-  }, [] )
 
   useEffect( ()=>{
       fetch("/games").then( r => r.json() ).then( (data)=>{

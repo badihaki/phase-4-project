@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import GameReview from "../GameReviews/GameReviews";
 import GameUpdate from "./GameUpdate";
 
 function GameCard(){
@@ -9,14 +10,20 @@ function GameCard(){
 
     useEffect(()=>{
         fetch(`/games/${id}`).then(r=>r.json()).then(data=>{
-            console.log(data);
-            setGame(data)
+            setGame(data);
         })},[])
 
     function handleShowUpdateFormButton(){
         const result = !showForm;
         setShowForm(result);
     }
+
+   const reviews = ()=>{
+    if (game===null){ return <div>""</div> }
+    return game.reviews.map(review=>{
+        return <GameReview key={review.id} review={review} />
+    })
+}
 
     function CardComponent(){
         return(
@@ -36,6 +43,9 @@ function GameCard(){
                 { showForm? <GameUpdate game={game} changeGameInfo={setGame} /> : "" }
                 <br />
                 <br />
+                { game? "Reviews:" : "" }
+                <br />
+                {reviews()}
                 <Link to={"/gamelist"} >Back to list</Link>
             </div>
         )
