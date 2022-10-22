@@ -41,7 +41,7 @@ class ReviewsController < ApplicationController
     end
 
     def find_review
-        Review.find(id:params[:id])
+        Review.find(params[:id])
     end
 
     def find_user
@@ -49,7 +49,7 @@ class ReviewsController < ApplicationController
     end
 
     def authorize
-        render json: {error: "Not authorized"}, status: :unauthorized, unless session.include? :user_id
+        render json: {error: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
 
     def not_found_response

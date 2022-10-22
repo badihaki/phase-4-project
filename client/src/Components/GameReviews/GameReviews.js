@@ -6,8 +6,6 @@ function GameReview( {review} ){
         <div>
             {review.score}
             <br />
-            {review.comment}
-            <br />
             <Link to={`../reviews/${review.id}`} >Full review</Link>
             <br />
         </div>
