@@ -22,6 +22,7 @@ function NavigationBar(){
                 <h4>Navigation</h4>
                 <Link to={"/"}> Home </Link> ~|~
                 <Link to={"/gamelist"}> Games </Link> ~|~
+                {user? <span><Link to={"/reviews"}> Your Reviews </Link> ~|~</span> : ""}
             </span>
             <span>
                 { user? <MiniProfileContainer /> : <Link to={"/signup"}><button> Sign Up </button></Link> }
