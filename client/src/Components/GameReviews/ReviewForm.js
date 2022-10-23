@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 
 function NewReviewForm(){
@@ -63,6 +63,8 @@ function NewReviewForm(){
             <br />
             <button type="submit" >Submit</button>
             {messages? "Got messages" :""}
+            <br />
+            <Link to={`/gamelist/${id}`}>Back to Game Page</Link>
         </form>
     )
 }
