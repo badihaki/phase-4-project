@@ -9,10 +9,24 @@ function ReviewList(){
 
     useEffect( ()=>{
         fetch(`/users/${user.id}/reviews`).then(r=>r.json()).then(data=>{
-            console.log(data);
             setReviews(data);
         })
     }, [])
+
+    function deleteReview(review){
+        fetch(`/users/${user.id}/reviews/${review.id}`,{
+            method: "DELETE",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(review)
+        }).then( r=>r.json).then( ()=>{
+            const newReviewList = reviews.filter(reviewToCheck=>{
+                return reviewToCheck.id !== review.id
+            })
+            setReviews(newReviewList);
+        })
+    }
 
     const reviewCards = ()=>{
         if(reviews === null){
@@ -22,6 +36,7 @@ function ReviewList(){
 
             function handleDeleteButton(){
                 console.log(review);
+                deleteReview(review);
             }
 
             return (
