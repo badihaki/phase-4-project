@@ -12,6 +12,7 @@ import GamesList from './Components/Games/GameList';
 import GameCard from './Components/Games/GameCard';
 import NavigationFooter from './Components/Nav/NavigationFooter';
 import ReviewCard from './Components/GameReviews/ReviewCard';
+import NewReviewForm from './Components/GameReviews/ReviewForm';
 
 function App() {
 
@@ -56,6 +57,9 @@ function App() {
         <NavigationBar />
         <Switch>
           {/* Real routes begin here */}
+          <Route exact path={"/gamelist/:id/newReview"}>
+            <NewReviewForm />
+          </Route>
           <Route exact path={"/reviews/:id"} >
             <ReviewCard />
           </Route>

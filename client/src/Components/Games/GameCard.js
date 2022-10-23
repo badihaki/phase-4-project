@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GameReview from "../GameReviews/GameReviews";
+import ReviewMiniCard from "../GameReviews/ReviewMiniCard";
 import GameUpdate from "./GameUpdate";
 
 function GameCard(){
@@ -21,7 +21,12 @@ function GameCard(){
    const reviews = ()=>{
     if (game===null){ return <div>""</div> }
     return game.reviews.map(review=>{
-        return <GameReview key={review.id} review={review} />
+        return (
+            <div key={review.id} >
+                <ReviewMiniCard review={review} />
+                <br />
+            </div>
+        )
     })
 }
 
@@ -43,9 +48,12 @@ function GameCard(){
                 { showForm? <GameUpdate game={game} changeGameInfo={setGame} /> : "" }
                 <br />
                 <br />
+                <Link to={`/gamelist/${id}/newReview`}>Post a review</Link>
+                <br />
                 { game? "Reviews:" : "" }
                 <br />
                 {reviews()}
+                <br />
                 <Link to={"/gamelist"} >Back to list</Link>
             </div>
         )

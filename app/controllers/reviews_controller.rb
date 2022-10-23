@@ -45,7 +45,7 @@ class ReviewsController < ApplicationController
     end
 
     def find_user
-        User.find(id:sessions[:user_id])
+        User.find(params[:id])
     end
 
     def authorize

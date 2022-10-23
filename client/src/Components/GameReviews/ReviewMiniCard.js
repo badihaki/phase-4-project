@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function GameReview( {review} ){
+function ReviewMiniCard( {review} ){
     return(
         <div>
             {review.score}
@@ -12,4 +12,4 @@ function GameReview( {review} ){
     )
 }
 
-export default GameReview;
+export default ReviewMiniCard;
