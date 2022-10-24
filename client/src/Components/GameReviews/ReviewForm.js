@@ -12,7 +12,7 @@ function NewReviewForm(){
         "game_id":id
     });
 
-    const [messages, setMessages] = useState(null);
+    const [message, setMessage] = useState("");
 
     function handleFormChange(e){
         const key = e.target.name;
@@ -34,16 +34,26 @@ function NewReviewForm(){
         }).then(r=>{
             if(r.ok){
                 r.json().then(data=>{
-                    setMessages(null);
+                    setMessage("Submitted");
                     console.log(data);
+                    clearForm();
                 })
             }
             else{
                 r.json().then(data=>{
-                    setMessages(data);
+                    setMessage("error");
                 })
             }
         })
+    }
+
+    function clearForm(){
+        const replacementReview = {
+            "score":1,
+            "comment":"",
+            "game_id":id
+        }
+        setReview(replacementReview);
     }
 
     return(
@@ -62,7 +72,10 @@ function NewReviewForm(){
             <input type={"text"} name={"comment"} value={review.comment} onChange={handleFormChange} />
             <br />
             <button type="submit" >Submit</button>
-            {messages? "Got messages" :""}
+            <br />
+            <div>
+                {message}
+            </div>
             <br />
             <Link to={`/gamelist/${id}`}>Back to Game Page</Link>
         </form>

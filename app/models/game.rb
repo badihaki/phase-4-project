@@ -10,7 +10,7 @@ class Game < ApplicationRecord
         if self.reviews.count > 0
             self.reviews.reduce(0){ |sum, review| sum+review.score } / self.reviews.count
         else
-            "X"
+            "No reviews yet"
         end
     end
 

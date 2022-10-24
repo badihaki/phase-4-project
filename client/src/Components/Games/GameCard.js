@@ -54,6 +54,11 @@ function GameCard(){
                 <br />
                 {reviews()}
                 <br />
+                <div>
+                    <h3>Overall review score:</h3>
+                    {game.aggregate_score}
+                </div>
+                <br />
                 <Link to={"/gamelist"} >Back to list</Link>
             </div>
         )

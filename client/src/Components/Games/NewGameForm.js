@@ -20,8 +20,8 @@ function NewGameForm( {addGame} ){
 
     function handleSubmit(e){
         e.preventDefault();
-        clearForm();
         addGame(gameObj);
+        clearForm();
     }
 
     function handleChange(e){

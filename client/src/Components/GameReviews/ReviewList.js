@@ -29,7 +29,7 @@ function ReviewList(){
     }
 
     const reviewCards = ()=>{
-        if(reviews === null){
+        if(reviews === null || reviews.length < 1){
             return <span>You have no reviews. Go find a game and make one!</span>
         }
         return reviews.map( review => {
@@ -59,7 +59,7 @@ function ReviewList(){
 
     return(
         <div>
-            Reviews
+            <h2>{user.nickname}'s Reviews</h2>
             <br />
             {reviewCards()}
         </div>
