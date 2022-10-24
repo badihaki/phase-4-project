@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
+import EditReviewForm from "./EditReviewForm";
 import ReviewMiniCard from "./ReviewMiniCard";
 
 function ReviewList(){
@@ -33,14 +34,30 @@ function ReviewList(){
             return <span>You have no reviews. Go find a game and make one!</span>
         }
         return reviews.map( review => {
-
             function handleDeleteButton(){
-                console.log(review);
                 deleteReview(review);
             }
-
+            function handlePatchForm(updatedObj){
+                fetch(`/users/${user.id}/reviews/${review.id}`,{
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(updatedObj)
+                  }).then(r=>r.json()).then(data=>{
+                    console.log(data);
+                    const newReviewList = [...reviews];
+                    newReviewList.map(r=>{
+                        if(r.id === data.id){
+                            r.comment = data.comment;
+                            r.score = data.score;
+                        }
+                    })
+                    setReviews(newReviewList);
+                  })
+            }
             return (
-                <div>
+                <div key={review.id}>
                     {review.game.name}
                     <br />
                     {review.comment}
@@ -48,6 +65,8 @@ function ReviewList(){
                     {review.score}
                     <br />
                     Edit This Review
+                    <br />
+                    <EditReviewForm review={review} patchReview={handlePatchForm} />
                     <br />
                     <button onClick={handleDeleteButton}>Delete This Review</button>
                     <br />
