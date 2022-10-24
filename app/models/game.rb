@@ -7,6 +7,11 @@ class Game < ApplicationRecord
     validates :genre, presence: true
 
     def aggregate_score
-        self.reviews.reduce(0){ |sum, review| sum+review.score } / self.reviews.count
+        if self.reviews.count > 0
+            self.reviews.reduce(0){ |sum, review| sum+review.score } / self.reviews.count
+        else
+            "X"
+        end
     end
+
 end

@@ -30,7 +30,7 @@ function ReviewList(){
 
     const reviewCards = ()=>{
         if(reviews === null){
-            return <span></span>
+            return <span>You have no reviews. Go find a game and make one!</span>
         }
         return reviews.map( review => {
 

@@ -7,7 +7,7 @@ class GamesController < ApplicationController
 
     def show
         game = find_game()
-        render json: game, status: :ok
+        render json: game, methods: [:aggregate_score], status: :ok
     end
 
     def create
