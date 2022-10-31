@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :create, :update] do
     resources :reviews
   end
-  resources :games, only: [:index, :show, :destroy] do
+  resources :games, only: [:index, :show, :create, :update] do
   end
   resources :reviews, only: [:show]
   #resources :games, only: [:create, :index, :show, :destroy]

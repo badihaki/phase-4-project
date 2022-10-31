@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../Context/UserContext";
 
 function NewPlayer(){
     const [userForm, setUserForm] = useState({
@@ -8,6 +9,8 @@ function NewPlayer(){
         "nickname":"",
         "bio":""
     })
+
+    const {setUser} = useContext(UserContext);
 
     function onSubmit(e){
         e.preventDefault();
@@ -23,6 +26,7 @@ function NewPlayer(){
             ).then(
                 (data)=>{
                     console.log(data);
+                    setUser(data);
                 }
             )
     }
