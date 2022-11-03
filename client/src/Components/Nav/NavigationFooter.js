@@ -4,7 +4,7 @@ function NavigationFooter(){
     return(
         <div>
             <p>
-                Version 0.3 -- Alpha Censure
+                Version 0.9 -- Alpha Yaddle
             </p>
         </div>
     )

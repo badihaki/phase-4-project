@@ -14,6 +14,7 @@ import NavigationFooter from './Components/Nav/NavigationFooter';
 import ReviewCard from './Components/GameReviews/ReviewCard';
 import NewReviewForm from './Components/GameReviews/ReviewForm';
 import ReviewList from './Components/GameReviews/ReviewList';
+import UserGames from './Components/Games/UserGames';
 
 function App() {
 
@@ -58,25 +59,28 @@ function App() {
         <NavigationBar />
         <Switch>
           {/* Real routes begin here */}
-          <Route exact path={"/reviews"} >
+          <Route exact path={"/user/games"}>
+            <UserGames />
+          </Route>
+          <Route exact path={"/user/reviews"} >
             <ReviewList />
           </Route>
-          <Route exact path={"/gamelist/:id/newReview"}>
+          <Route exact path={"/games/:id/newReview"}>
             <NewReviewForm />
           </Route>
           <Route exact path={"/reviews/:id"} >
             <ReviewCard />
           </Route>
-          <Route exact path={"/gamelist/:id"}>
+          <Route exact path={"/games/:id"}>
                 <GameCard />
           </Route>
-          <Route exact path={"/gamelist"}>
+          <Route exact path={"/games"}>
             <GamesList games={games} postGames={postNewGame} />
           </Route>
           <Route exact path={"/updateplayer"}>
             <UpdatePlayerForm />
           </Route>
-          <Route exact path={"/profile"}>
+          <Route exact path={"/user"}>
             <Profile />
           </Route>
           <Route exact path={"/signup"}>

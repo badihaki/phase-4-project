@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 import EditReviewForm from "./EditReviewForm";
 import ReviewMiniCard from "./ReviewMiniCard";
@@ -79,6 +80,10 @@ function ReviewList(){
     return(
         <div>
             <h2>{user.nickname}'s Reviews</h2>
+            <br />
+            <Link to={"/user"}>Back to Profile</Link>
+            <br />
+            <br />
             <br />
             {reviewCards()}
         </div>

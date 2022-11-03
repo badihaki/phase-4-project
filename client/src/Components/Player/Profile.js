@@ -39,6 +39,11 @@ function Profile(){
             </div>
             <br />
             <br />
+            <Link to={"/user/reviews"}> Your Reviews </Link>
+            <br />
+            <Link to={"/user/games"}> Your Games </Link>
+            <br />
+            <br />
             <Link to={"/updateplayer"}><button>Update Profile</button></Link>
         </div>
         )
