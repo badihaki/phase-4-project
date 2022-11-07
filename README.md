@@ -1,47 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-# Rails backend, REACT frontend
-## At least 3 backend models that include:
-	- At least 2 one-to-many relationships
-	- At least 1 many-to-many relationships
-		- implemented with 'has many through'
-		- Must use a join table with a user-submittable attribute
-	- Full CRUD for at least one resource
-	- Minimum Create and Read for each resource
-## At least 3 diff client-side routes using React Router
-	- Include nav-bar, duh
-## Implement authentication/authorization, including password protection.
-	- Sign up new user
-	- Sign/Log in user with secure password
-	- Stay signed in
-	- Sign/Log out
-	- User should only be able to edit and delete resources in they are logged in and creator of that resource
-
 ### Set Up
-In order to run the servers, run these commands in order:
+In order to run the servers, fork and clone this repository, cd to directory, and run these commands in order:
 - Start the Postgresql server:
     $ sudo service postgresql start
 - Start rails server
@@ -49,7 +9,20 @@ In order to run the servers, run these commands in order:
 - Start npm server
     $ npm start --prefix client
 
-# LFG - Looking for Group
+# Game Reviews Aggregate
+
+## General
+
+This is my project for Phase 4 of Flatiron's online software engineering course. I made an aggregator for user reviews. I imagine this to be an alternative to product reviews on product sites, a sort of Glassdoor for video games, something unhindered by the need to sell the product it asks you to review.
+
+## Minimal Viable Product
+
+The MVP will contain the API to access the database for Users, Games and Reviews tables, while also containing code to render a simple front-end. Styling will be limited, but Users will be able to add games to the list, submit reviews for games and edit and delete their associated reviews.
+
+## Further Goals
+
+* More unique styling
+
 ## Models
 * Players (Users)
     - parms:
@@ -67,23 +40,13 @@ In order to run the servers, run these commands in order:
         - description
 	- have many groups
 	- has many players, through groups
-* Group
+* Reviews
     - params:
-        - name
-        - message
-        - game_id
-    belongs to game
-    has many group requests
-    has many players through group requests
-* Group Request - join table
-    - Joings player to group
-    - params:
-        - game_id -- user submittable
-        - user_id
-        - request_message (string) -- user submittable
-	- belongs to group
-    - belonggs to user
-    - belongs to game
+        - Score
+        - Comment
+    - JOIN TABLE
+        - Belongs to both Users and Games
+        - Schema must contain 'game_id' and 'user_id'
 ## Controllers
 * Players/Users
     - Create
@@ -101,21 +64,17 @@ In order to run the servers, run these commands in order:
         - Only Description
     - Delete
         - include group requests
-* Group
+* Reviews
     - Create
-        - 'create_params' are :name, :message, :game_id
+        - 'permitted_params' method to allow game_id, score, comment and user_id
+            - Must include user_id and game_id
     - Read
-        - include players through group_requests
-        - Show and Index
+        - Index
+            - Can get all reviews
+            - Can get all reviews associated to signed in user
     - Update
-        - 'update_params' method to permit update to name and message
+        - Only comment and score
     - Delete
-        - include group requests
-* Group_Requests
-    - Create
-        - 'create_params' = game_id, player_id, request_message
-    - Read
-        - 'Index' and 'show' actions
 ## Components
 * App
     - Base app
@@ -140,22 +99,12 @@ In order to run the servers, run these commands in order:
         - view player info
         * Update Player Form
             - Updates Player nickname, bio
-        * Add Games Form
-            Add Existing Game Form
-                - Adds a game from list of games
-                - List of games player doesn't have
-                - Can filter by genre
-            * New Game Form
-                - Adds a new game
-                - Name
-                - Genre
-                - Console
-    * Consoles
-        - Shows a list of consoles
-        - Submit new console button (if logged in)
-        * New console Form
-            - Adds a new console
-            - Console name
+        * User Reviews
+            - List reviews user has submitted
+            - Edit reviews (comments, score only)
+            - Delete reviews
+        * User Games
+            - Show data associated with the game a user has, through the review
     * Games
         - Shows list of games
         - New game button
@@ -167,39 +116,11 @@ In order to run the servers, run these commands in order:
         * Game Info
             - Shows information about the game
             - Genre
-            - Active Players
-            - Sessions
-        - Delete game button (if logged in)
-    * Sessions
-        - Shows a list of sessions
-        - If logged in:
-            - 'Show My Sessions' button
-            * Player Sessions
-                - Shows a list of sessions for that specific player
-                - If session creator: Session delete button
-                - Shows a list of players associated with the session
-            * Create new Session
-                - Select a game from dropdown menu
-                - Session creator is logged in player
-                - Console is game.console
+            - Description
+            - Reviews and aggregate score
+            * Game reviews
+                - Show list of reviews for a game
+            * New Review Form
+                - Allows for submission of additional reviews
 * password for admin is admin0089
 * password for admin is lifeink with local db
-
-### TODO ::
-- Make Group Request Card and New Request components
-    - New Request
-        - child component of group card, so you can see all requests per card
-        - 'Group[x].group_requests' maybe?
-    - Group Request Card
-        - simply show the right name for the right game, and show their message
-        - 'GroupRequest[x].user'??
-
-NOTES
-- make models make sense through join table
-- Take out unneccessary IDs
-- session hash for all create/update/delete actions
-    - current_user method to find current user from session hash
- - Remember - the backend is the keeper of the logged in user.
-    - The frontend doesn’t need to tell the backend who is logged in!  The backend just checks the session hash!
-- Also don’t forget to use the user’s ASSOCIATIONS to limit the access to only their stuff.
-    - If a user has many books, I should in the backend be finding the user (using the id from the session hash) and returning THAT user’s books (current_user.books - that is one of the collection methods)
