@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { GamesContext } from "../../Context/GamesContext";
+import NewReviewForm from "../GameReviews/ReviewForm";
 import ReviewMiniCard from "../GameReviews/ReviewMiniCard";
 import GameUpdate from "./GameUpdate";
 
@@ -9,10 +10,12 @@ function GameCard(){
     const {games} = useContext(GamesContext)
     const { id } = useParams()
     const [showForm, setShowForm] = useState(false);
+    const [gameReviews, setGameReviews] = useState([]);
 
     useEffect( ()=>{
         const thisGame = games.find( (game) => {return game.id==id});
         setGame(thisGame);
+        setGameReviews(thisGame.reviews)
     }, [])
 
     function handleShowUpdateFormButton(){
@@ -22,7 +25,7 @@ function GameCard(){
 
    const reviews = ()=>{
     if (game === null){ return <div>""</div> }
-    return game.reviews.map(review=>{
+    return gameReviews.map(review=>{
         return (
             <div key={review.id} >
                 <ReviewMiniCard review={review} />
@@ -30,6 +33,11 @@ function GameCard(){
             </div>
         )
     })
+}
+
+function addReview(reviewToAdd){
+    const newReviewList = [...gameReviews, reviewToAdd];
+    setGameReviews(newReviewList);
 }
 
     function CardComponent(){
@@ -50,7 +58,8 @@ function GameCard(){
                 { showForm? <GameUpdate game={game} changeGameInfo={setGame} /> : "" }
                 <br />
                 <br />
-                <Link to={`/games/${id}/newReview`}>Post a review</Link>
+                <h3>Post a review</h3>
+                <NewReviewForm addReview={addReview} />
                 <br />
                 { game? "Reviews:" : "" }
                 <br />

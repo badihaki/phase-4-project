@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ReviewsContext } from "../../Context/ReviewsContext";
 import { UserContext } from "../../Context/UserContext";
 import EditReviewForm from "./EditReviewForm";
-import ReviewMiniCard from "./ReviewMiniCard";
 
 function ReviewList(){
 
@@ -24,10 +23,28 @@ function ReviewList(){
             setUserReviews(newReviewList);
         })
     }
+    function patchReview(updatedReview, reviewID ){
+        fetch(`/users/${user.id}/reviews/${reviewID}`,{
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedReview)
+          }).then(r=>r.json()).then(data=>{
+            const newReviewList = [...userReviews];
+            newReviewList.map(r=>{
+                if(r.id === data.id){
+                    r.comment = data.comment;
+                    r.score = data.score;
+                }
+            })
+            setUserReviews(newReviewList);
+          })
+    }
 
     const reviewCards = ()=>{
         if(userReviews === null || userReviews.length < 1){
-            return <span>You have no reviews. Go find a game and make one!</span>
+            return <span>Not enough reviews. Go review stuff!!</span>
         }
         return userReviews.map( review => {
             
@@ -35,23 +52,9 @@ function ReviewList(){
                 deleteReview(review);
             }
             function handlePatchForm(updatedObj){
-                fetch(`/users/${user.id}/reviews/${review.id}`,{
-                    method: "PATCH",
-                    headers: {
-                      "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(updatedObj)
-                  }).then(r=>r.json()).then(data=>{
-                    console.log(data);
-                    const newReviewList = [...userReviews];
-                    newReviewList.map(r=>{
-                        if(r.id === data.id){
-                            r.comment = data.comment;
-                            r.score = data.score;
-                        }
-                    })
-                    setUserReviews(newReviewList);
-                  })
+                // console.log(updatedObj);
+                // console.log(review.id)
+                patchReview(updatedObj, review.id);
             }
             return (
                 <div key={review.id}>

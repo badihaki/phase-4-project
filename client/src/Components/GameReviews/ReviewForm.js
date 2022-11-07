@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ReviewsContext } from "../../Context/ReviewsContext";
 import { UserContext } from "../../Context/UserContext";
 
-function NewReviewForm(){
+function NewReviewForm({ addReview }){
     const {id} = useParams();
     const {user} = useContext(UserContext)
 
@@ -13,8 +13,8 @@ function NewReviewForm(){
         "game_id":id
     });
 
-    const [message, setMessage] = useState("");
-    const { reviews, setReviews } = useContext(ReviewsContext);
+    const [errors, setErrors] = useState([""]);
+    const { reviews, setReviews, userReviews, setUserReviews } = useContext(ReviewsContext);
 
     function handleFormChange(e){
         const key = e.target.name;
@@ -22,7 +22,6 @@ function NewReviewForm(){
         const newReviewState = {...review};
         newReviewState[key] = value;
         setReview(newReviewState);
-        console.log(reviews);
     }
 
     function handleSubmit(e){
@@ -37,18 +36,39 @@ function NewReviewForm(){
         }).then(r=>{
             if(r.ok){
                 r.json().then(data=>{
-                    setMessage("Submitted");
+                    setErrors(null);
+                    const newReviews = [...reviews, data];
+                    setReviews(newReviews);
+                    const newUserReviews = [...userReviews, data];
+                    setUserReviews(newUserReviews);
                     console.log(data);
                     clearForm();
+                    addReview(data);
                 })
             }
             else{
                 r.json().then(data=>{
-                    setMessage("error");
+                    console.log(data.errors.comment);
+                    setErrors(data.errors.comment);
                 })
             }
         })
     }
+
+    // function messages(){
+    //     if(errors === null) return ""
+    //     else return errors.map( (error)=>{
+    //         return (
+    //             <div>{error}</div>
+    //         )
+    //     })
+    // }
+
+    const messages = errors.map( (error)=>{
+                 return (
+                     <div key={error}>{error}</div>
+                 )
+                })
 
     function clearForm(){
         const replacementReview = {
@@ -77,7 +97,7 @@ function NewReviewForm(){
             <button type="submit" >Submit</button>
             <br />
             <div>
-                {message}
+                {messages}
             </div>
             <br />
             <Link to={`/games/${id}`}>Back to Game Page</Link>

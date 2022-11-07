@@ -63,9 +63,6 @@ function App() {
           <Route exact path={"/user/reviews"} >
             <ReviewList />
           </Route>
-          <Route exact path={"/games/:id/newReview"}>
-            <NewReviewForm />
-          </Route>
           <Route exact path={"/reviews/:id"} >
             <ReviewCard />
           </Route>
