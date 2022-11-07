@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { GamesContext } from "../../Context/GamesContext";
 import ReviewMiniCard from "../GameReviews/ReviewMiniCard";
 import GameUpdate from "./GameUpdate";
 
 function GameCard(){
     const [game, setGame] = useState(null);
+    const {games} = useContext(GamesContext)
     const { id } = useParams()
     const [showForm, setShowForm] = useState(false);
 
-    useEffect(()=>{
-        fetch(`/games/${id}`).then(r=>r.json()).then(data=>{
-            setGame(data);
-        })},[])
+    useEffect( ()=>{
+        const thisGame = games.find( (game) => {return game.id==id});
+        setGame(thisGame);
+    }, [])
 
     function handleShowUpdateFormButton(){
         const result = !showForm;
@@ -19,7 +21,7 @@ function GameCard(){
     }
 
    const reviews = ()=>{
-    if (game===null){ return <div>""</div> }
+    if (game === null){ return <div>""</div> }
     return game.reviews.map(review=>{
         return (
             <div key={review.id} >
@@ -48,7 +50,7 @@ function GameCard(){
                 { showForm? <GameUpdate game={game} changeGameInfo={setGame} /> : "" }
                 <br />
                 <br />
-                <Link to={`/gamelist/${id}/newReview`}>Post a review</Link>
+                <Link to={`/games/${id}/newReview`}>Post a review</Link>
                 <br />
                 { game? "Reviews:" : "" }
                 <br />

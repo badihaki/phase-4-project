@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ReviewsContext } from "../../Context/ReviewsContext";
 import { UserContext } from "../../Context/UserContext";
 import EditReviewForm from "./EditReviewForm";
 import ReviewMiniCard from "./ReviewMiniCard";
@@ -7,13 +8,7 @@ import ReviewMiniCard from "./ReviewMiniCard";
 function ReviewList(){
 
     const {user} = useContext(UserContext);
-    const [reviews, setReviews] = useState(null)
-
-    useEffect( ()=>{
-        fetch(`/users/${user.id}/reviews`).then(r=>r.json()).then(data=>{
-            setReviews(data);
-        })
-    }, [])
+    const { userReviews, setUserReviews } = useContext(ReviewsContext);
 
     function deleteReview(review){
         fetch(`/users/${user.id}/reviews/${review.id}`,{
@@ -23,18 +18,19 @@ function ReviewList(){
             },
             body: JSON.stringify(review)
         }).then( r=>r.json).then( ()=>{
-            const newReviewList = reviews.filter(reviewToCheck=>{
+            const newReviewList = userReviews.filter(reviewToCheck=>{
                 return reviewToCheck.id !== review.id
             })
-            setReviews(newReviewList);
+            setUserReviews(newReviewList);
         })
     }
 
     const reviewCards = ()=>{
-        if(reviews === null || reviews.length < 1){
+        if(userReviews === null || userReviews.length < 1){
             return <span>You have no reviews. Go find a game and make one!</span>
         }
-        return reviews.map( review => {
+        return userReviews.map( review => {
+            
             function handleDeleteButton(){
                 deleteReview(review);
             }
@@ -47,14 +43,14 @@ function ReviewList(){
                     body: JSON.stringify(updatedObj)
                   }).then(r=>r.json()).then(data=>{
                     console.log(data);
-                    const newReviewList = [...reviews];
+                    const newReviewList = [...userReviews];
                     newReviewList.map(r=>{
                         if(r.id === data.id){
                             r.comment = data.comment;
                             r.score = data.score;
                         }
                     })
-                    setReviews(newReviewList);
+                    setUserReviews(newReviewList);
                   })
             }
             return (

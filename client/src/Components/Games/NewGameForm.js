@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { GamesContext } from "../../Context/GamesContext";
 import GenreDropdown from "./GenreDropdown";
 
-function NewGameForm( {addGame} ){
+function NewGameForm(){
+
+    const {games, setGames} = useContext(GamesContext);
 
     const [ gameObj, setGameObj ] = useState({
         "name": "",
@@ -20,8 +23,25 @@ function NewGameForm( {addGame} ){
 
     function handleSubmit(e){
         e.preventDefault();
-        addGame(gameObj);
+        postNewGame(gameObj);
         clearForm();
+    }
+
+    function postNewGame(gameObj){
+        fetch("/games",{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(gameObj)
+        }).then(r=>{
+            if(r.ok){
+                r.json().then(data=>{
+                    const newGamesList = [...games, data];
+                    setGames(newGamesList);
+                })
+            }
+        })
     }
 
     function handleChange(e){

@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
+import { GamesContext } from "../../Context/GamesContext";
 import { UserContext } from "../../Context/UserContext";
 import GameMiniCard from "./GameCardMini";
 import NewGameForm from "./NewGameForm";
 
-function GamesList( { games, postGames } ){
+function GamesList(){
 
     const { user } = useContext(UserContext);
+    const { games, setGames } = useContext(GamesContext);
 
     const gameCards = games.map( (game)=>{
         return <GameMiniCard key={game.id} game={game} />
@@ -17,7 +19,7 @@ function GamesList( { games, postGames } ){
             <p>
                 Here is a list of games{user? ", as well as the ability to add a game.":"." }
             </p>
-            {user? <NewGameForm addGame={postGames} /> : "" }
+            {user? <NewGameForm /> : "" }
             <br />
             <h2>List of games</h2>
             {user? "": "Sign up or log in to view more info for each game"}

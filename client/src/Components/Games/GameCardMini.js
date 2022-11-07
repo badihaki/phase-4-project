@@ -9,7 +9,7 @@ function GameMiniCard( { game } ){
     return(
         <div>
             { user?
-             <Link to={`/gamelist/${game.id}`}><h4>{ game.name }</h4></Link>
+             <Link to={`/games/${game.id}`}><h4>{ game.name }</h4></Link>
             :
             <h4> {game.name} </h4>
              }

@@ -15,11 +15,27 @@ import ReviewCard from './Components/GameReviews/ReviewCard';
 import NewReviewForm from './Components/GameReviews/ReviewForm';
 import ReviewList from './Components/GameReviews/ReviewList';
 import UserGames from './Components/Games/UserGames';
+import { GamesContext } from './Context/GamesContext';
+import { ReviewsContext } from './Context/ReviewsContext';
 
 function App() {
 
-  const { setUser } = useContext(UserContext);
-  const [ games, setGames ] = useState(null);
+  const { user, setUser } = useContext(UserContext);
+  const { games, setGames } = useContext(GamesContext);
+  const {userReviews, setUserReviews, } = useContext(ReviewsContext);
+  //const [ games, setGames ] = useState(null);
+  useEffect( ()=>{
+    fetch("/me").then( (r) => {
+        if(r.ok){
+            r.json().then( (data) => setUser(data) );
+        }
+    });
+  }, [] )
+  useEffect( ()=>{
+    fetch(`/users/${user.id}/reviews`).then(r=>r.json()).then(data=>{
+        setUserReviews(data);
+    })
+  }, [user])
 
   useEffect( ()=>{
       fetch("/games").then( r => r.json() ).then( (data)=>{
@@ -27,30 +43,6 @@ function App() {
       })
   }, [] )
 
-  function postNewGame(gameObj){
-      fetch("/games",{
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(gameObj)
-      }).then(r=>{
-          if(r.ok){
-              r.json().then(data=>{
-                  const newGamesList = [...games, data];
-                  setGames(newGamesList);
-              })
-          }
-      })
-  }
-
-  useEffect( ()=>{
-    fetch("/me").then( (r) => {
-        if(r.ok){
-            r.json().then( (data) => setUser(data) );
-        }
-    });
-}, [] )
 
 
   return (
@@ -75,7 +67,7 @@ function App() {
                 <GameCard />
           </Route>
           <Route exact path={"/games"}>
-            <GamesList games={games} postGames={postNewGame} />
+            <GamesList />
           </Route>
           <Route exact path={"/updateplayer"}>
             <UpdatePlayerForm />

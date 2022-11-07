@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './Context/UserContext';
+import { GamesProvider } from './Context/GamesContext';
+import { ReviewsContext, ReviewsProvider } from './Context/ReviewsContext';
 // import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
       <UserProvider>
-        <App />
+        <GamesProvider>
+          <ReviewsProvider>
+            <App />
+          </ReviewsProvider>
+        </GamesProvider>
       </UserProvider>
     </React.StrictMode>
 );
