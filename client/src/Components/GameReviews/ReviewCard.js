@@ -25,7 +25,7 @@ function ReviewCard(){
             {review.score}
             <br />
             <br />
-            <Link to={`../gamelist/${review.game.id}`}>Back to game</Link>
+            <Link to={`../games/${review.game.id}`}>Back to game</Link>
         </div>
     }
 

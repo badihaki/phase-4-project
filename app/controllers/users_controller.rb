@@ -37,7 +37,11 @@ class UsersController < ApplicationController
     end
 
     def find_with_session
-        User.find_by(id: session[:user_id])
+        if session[:user_id]
+            User.find_by(id: session[:user_id])
+#        else
+#            return render json: {error: " No Session "}
+        end
     end
 
     def create_params

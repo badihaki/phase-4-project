@@ -5,8 +5,14 @@ class ReviewsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
 
     def index
-        user = find_user()
-        render json: user.reviews.all, status: :ok
+        if params[:user_id]
+            user = find_user()
+            # debugger
+            render json: user.reviews.all, status: :ok
+        else
+            debugger
+            render Review.all, status: :ok
+        end
     end
 
     def show
@@ -37,7 +43,7 @@ class ReviewsController < ApplicationController
     private
 
     def permitted_params
-        params.permit(:game_id, :score, :comment)
+        params.permit(:game_id, :score, :comment, :user_id)
     end
 
     def find_review

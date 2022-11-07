@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :create, :update] do
-    resources :reviews, except: [:show]
+    resources :reviews, except: [:show, :index]
   end
   resources :games, only: [:index, :show, :create, :update]
-  resources :reviews, only: [:show]
+  resources :reviews, only: [:show, :index]
   #resources :games, only: [:create, :index, :show, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

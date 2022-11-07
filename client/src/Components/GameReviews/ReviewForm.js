@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ReviewsContext } from "../../Context/ReviewsContext";
 import { UserContext } from "../../Context/UserContext";
 
 function NewReviewForm(){
@@ -13,6 +14,7 @@ function NewReviewForm(){
     });
 
     const [message, setMessage] = useState("");
+    const { reviews, setReviews } = useContext(ReviewsContext);
 
     function handleFormChange(e){
         const key = e.target.name;
@@ -20,6 +22,7 @@ function NewReviewForm(){
         const newReviewState = {...review};
         newReviewState[key] = value;
         setReview(newReviewState);
+        console.log(reviews);
     }
 
     function handleSubmit(e){
@@ -77,7 +80,7 @@ function NewReviewForm(){
                 {message}
             </div>
             <br />
-            <Link to={`/gamelist/${id}`}>Back to Game Page</Link>
+            <Link to={`/games/${id}`}>Back to Game Page</Link>
         </form>
     )
 }

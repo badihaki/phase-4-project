@@ -61,7 +61,7 @@ function GameCard(){
                     {game.aggregate_score}
                 </div>
                 <br />
-                <Link to={"/gamelist"} >Back to list</Link>
+                <Link to={"/games"} >Back to list</Link>
             </div>
         )
     }

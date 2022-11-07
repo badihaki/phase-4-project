@@ -22,7 +22,7 @@ function App() {
 
   const { user, setUser } = useContext(UserContext);
   const { games, setGames } = useContext(GamesContext);
-  const {userReviews, setUserReviews, } = useContext(ReviewsContext);
+  const { setReviews, setUserReviews, } = useContext(ReviewsContext);
   //const [ games, setGames ] = useState(null);
   useEffect( ()=>{
     fetch("/me").then( (r) => {
@@ -32,18 +32,25 @@ function App() {
     });
   }, [] )
   useEffect( ()=>{
-    fetch(`/users/${user.id}/reviews`).then(r=>r.json()).then(data=>{
-        setUserReviews(data);
-    })
+    if(user !== null){
+      fetch(`/users/${user.id}/reviews`).then(r=>r.json()).then(data=>{
+          setUserReviews(data);
+      })
+    }
   }, [user])
 
   useEffect( ()=>{
       fetch("/games").then( r => r.json() ).then( (data)=>{
           setGames(data);
       })
-  }, [] )
-
-
+    }, [] )
+    
+    useEffect( ()=>{
+      fetch(`/reviews`).then( r => r.json() ).then( (data)=>{
+        console.log(data);
+        setReviews(data);
+      })
+    }, [])
 
   return (
     <BrowserRouter>
