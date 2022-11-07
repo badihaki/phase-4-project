@@ -32,9 +32,9 @@ function App() {
     });
   }, [] )
   useEffect( ()=>{
-    if(user !== null){
+    if(user != null){
       fetch(`/users/${user.id}/reviews`).then(r=>r.json()).then(data=>{
-          setUserReviews(data);
+        setUserReviews(data);
       })
     }
   }, [user])
@@ -47,7 +47,6 @@ function App() {
     
     useEffect( ()=>{
       fetch(`/reviews`).then( r => r.json() ).then( (data)=>{
-        console.log(data);
         setReviews(data);
       })
     }, [])

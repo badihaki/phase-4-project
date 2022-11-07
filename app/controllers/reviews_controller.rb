@@ -10,8 +10,8 @@ class ReviewsController < ApplicationController
             # debugger
             render json: user.reviews.all, status: :ok
         else
-            debugger
-            render Review.all, status: :ok
+            # debugger
+            render json: Review.all, status: :ok
         end
     end
 
