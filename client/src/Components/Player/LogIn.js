@@ -11,6 +11,7 @@ function LogIn(){
     })
 
     const { user, setUser } = useContext(UserContext);
+    const [ errors, setErrors ] = useState([""])
 
     function onSubmit(e){
         //
@@ -28,10 +29,16 @@ function LogIn(){
                     r.json().then(data=>{
                         loginSuccessful(data);
                         setUser(data);
+                        setErrors([""]);
                     })
                 }
                 else{
-                    console.log("login unsuccessful, invalid email or pass or something else...");
+                    r.json().then(data=>{
+                        const newErrList = [];
+                        newErrList.push("login unsuccessful, invalid email or pass or something else...");
+                        console.log(data);
+                        setErrors(newErrList);
+                    })
                 }
             }
         )
@@ -59,6 +66,14 @@ function LogIn(){
         setUserLoginForm(newUser);
     }
 
+    const errorMessages = errors.map(err=>{
+        return(
+            <div id={err}>
+                {err}
+            </div>
+        )
+    })
+
     return(
         <div>
             { user?
@@ -74,6 +89,7 @@ function LogIn(){
                     <br />
                     <input type={"password"} name="password" value={userLoginForm.password} onChange={handleFormChange} />
                     <button type="Submit">Log In</button>
+                    {errorMessages}
                 </form>
             </div> }
         </div>

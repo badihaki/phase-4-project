@@ -53,12 +53,12 @@ class ReviewsController < ApplicationController
                 # reviews <<< comment.review
                 reviews.push(review)
             end
-    end
-    if reviews.count != 0
-        return render json: reviews, status: :ok
-    else
-        return render json: {error: "No reviews found"}
-    end
+        end
+        if reviews.count != 0
+            return render json: reviews, status: :ok
+        else
+            return render json: {error: "No reviews found"}
+        end
     end
 
     private
