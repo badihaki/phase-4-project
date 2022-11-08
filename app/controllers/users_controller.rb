@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         user = User.create!(create_params)
         render json: user, status: :created
     rescue ActiveRecord::RecordInvalid => error
-        render json: {errors: error.record.errors}
+        render json: {errors: error.record.errors}, status: :unprocessable_entity
     end
 
     def update

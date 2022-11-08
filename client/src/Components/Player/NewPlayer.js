@@ -10,11 +10,12 @@ function NewPlayer(){
         "bio":""
     })
 
+    const [ errors, setErrors ] = useState([""]);
+
     const {setUser} = useContext(UserContext);
 
     function onSubmit(e){
         e.preventDefault();
-        console.log(userForm);
         fetch("/users",{
             method: "POST",
             headers: {
@@ -22,12 +23,31 @@ function NewPlayer(){
             },
             body: JSON.stringify(userForm)
         }).then(
-            (r) => r.json()
-            ).then(
-                (data)=>{
-                    console.log(data);
-                    setUser(data);
+            (r) => {
+                // debugger;
+                if(r.ok){
+                    r.json().then(
+                        (data)=>{
+                            console.log(data);
+                            setUser(data);
+                            setErrors([""])
+                        }
+                    )
                 }
+                else{
+                    r.json().then(
+                        (data) => {
+                            console.log(data);
+                            const newErrorsArray = [];
+                            for (const key in data.errors) {
+                                console.log(`${key}: ${data.errors[key]}`);
+                                newErrorsArray.push(`${key}: ${data.errors[key]}`);
+                            }
+                            setErrors(newErrorsArray);
+                        }
+                    )
+                }
+            }
             )
     }
 
@@ -38,6 +58,14 @@ function NewPlayer(){
         newUser[key] = value;
         setUserForm(newUser);
     }
+
+    const errorMessages = errors.map(err=>{
+        return(
+            <div id={err}>
+                {err}
+            </div>
+        )
+    })
 
     return(
         <div>
@@ -61,6 +89,7 @@ function NewPlayer(){
                 <br />
                 <br />
                 <button type="Submit">Submit</button>
+                {errorMessages}
                 <button type="Reset">Reset</button>
             </form>
         </div>
