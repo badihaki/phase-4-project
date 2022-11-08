@@ -40,6 +40,27 @@ class ReviewsController < ApplicationController
         head :no_content
     end
 
+    # custom method: find reviews by term
+    # use params[:search_term] with comment.include?
+
+    def search
+        # get search term, save as variable 'to_lowercase
+        search = params[:search_term].downcase
+        reviews = []
+        Review.all.each do |review|
+            # find comment bsaed on params[search_term]
+            if review.comment.downcase.include? search
+                # reviews <<< comment.review
+                reviews.push(review)
+            end
+    end
+    if reviews.count != 0
+        return render json: reviews, status: :ok
+    else
+        return render json: {error: "No reviews found"}
+    end
+    end
+
     private
 
     def permitted_params

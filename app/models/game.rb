@@ -4,6 +4,8 @@ class Game < ApplicationRecord
     has_many :users, through: :reviews
     # validations
     validates :name, presence: true, uniqueness: true
+    # add  description validaiton
+    # save and isValid? <<-- invoke validations
     validates :genre, presence: true
 
     def aggregate_score

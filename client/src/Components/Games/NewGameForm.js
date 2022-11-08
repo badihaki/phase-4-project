@@ -12,6 +12,14 @@ function NewGameForm(){
         "description":""
     })
 
+    const [ errors, setErrors ] = useState([""])
+
+    const errorMessages = errors.map( (errorMessage)=>{
+        return (
+            <div key={errorMessage}>{errorMessage}</div>
+        )
+    })
+
     function clearForm(){
         const replacementGameObj = {
             "name": "",
@@ -39,6 +47,17 @@ function NewGameForm(){
                 r.json().then(data=>{
                     const newGamesList = [...games, data];
                     setGames(newGamesList);
+                    setErrors([""]);
+                })}
+            else{
+                r.json().then(data=>{
+                    // console.log(data.errors);
+                    const newErrorsArray = [];
+                    for (const key in data.errors) {
+                        console.log(`${key}: ${data.errors[key]}`);
+                        newErrorsArray.push(`${key}: ${data.errors[key]}`);
+                    }
+                    setErrors(newErrorsArray);
                 })
             }
         })
@@ -63,6 +82,8 @@ function NewGameForm(){
                 <br />
                 <br />
                 <button type="submit">Add game</button>
+                <br />
+                {errorMessages}
             </form>
         </div>
     )

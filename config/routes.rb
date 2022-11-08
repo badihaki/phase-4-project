@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   # test route
   get '/hello', to: 'application#hello_world'
 
+  # live coding
+  get '/reviews/find/:search_term', to: 'reviews#search'
+
   get '*path',
   to: 'fallback#index',
   constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -41,3 +41,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_145626) do
   end
 
 end
+
+# custom GET route that includes search term
+  # *** ONE word, No spaces, case sensitive
+# return all reviews that have that term in comment field
+# if no reviews it returns message
+
+# get '/reviews/:search_term' to reviews#search

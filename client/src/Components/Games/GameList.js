@@ -7,7 +7,7 @@ import NewGameForm from "./NewGameForm";
 function GamesList(){
 
     const { user } = useContext(UserContext);
-    const { games, setGames } = useContext(GamesContext);
+    const { games } = useContext(GamesContext);
 
     const gameCards = games.map( (game)=>{
         return <GameMiniCard key={game.id} game={game} />
